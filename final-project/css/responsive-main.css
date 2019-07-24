@@ -113,9 +113,9 @@
         width: 2em;
     }
     #counter {
-        left: 8em;
+        left: 6.5em;
     }
-    .searchInput {}
+    
 }
 
 @media (min-width: 576px) and (max-width: 767px) {

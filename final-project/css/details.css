@@ -21,7 +21,7 @@ html, body {
 #admin, #cart{
     display: flex;
     justify-content: center;
-    width: 5em;
+    width: 3em;
     height:3em;
     text-align: center;
 }
@@ -33,7 +33,7 @@ html, body {
 .menu-btns {
     position: absolute;
     right: 2em;
-    margin-top: 1em;
+    margin-top: .5em;
 }
 .menu-btns button{
     background-color: transparent;
