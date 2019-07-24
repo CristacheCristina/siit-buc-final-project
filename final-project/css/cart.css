@@ -195,18 +195,29 @@ hr {
     .title {
         margin-left: 1em;
     }
-    hr {
-        margin-left: 1em;
-    }
     #admin {
         width: 2em;
     }
     #counter {
         left: 5em;
+        height: 1.7em;
+        width: 1.7em;
+        padding-bottom: 1em;
+        padding: 0;
+    }
+    #checkout-table {
+        width: 40vw;
+    }
+    #checkoutBtn {
+        width: 40vw;
+    }
+    #checkingout {
+        width: 40vw;
+        margin: 4em 5vw 0 55vw;
     }
 }
 
-@media screen and (max-width:600px) {
+@media screen and (max-width:576px) {
     #name {
         text-align: left;
     }
@@ -226,6 +237,13 @@ hr {
     .quantityTd {
         width: 3em!important;
     }
+    .shipping {
+        font-size: 13px;
+    }
+    #counter{
+        width:2em;
+        height: 1.7em;
+    }
 }
 
 @media screen and (max-width:770px) {
@@ -234,7 +252,6 @@ hr {
         height: .3em;
         border-radius: 6px;
         position: absolute;
-        
     }
     #quantityTd {
         width: 5em;
