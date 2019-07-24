@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/9bca85d03b.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Literata&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/cart.css">
+    <title>Your Amazing Products are Here</title>
+</head>
+
+<body>
+    <section>
+        <nav class="navigation">
+            <div class="menu-list navigation" id="navbarNav">
+                <div>
+
+                    <ul class="nav-list mt-2 ml-3">
+                        <li>
+                            <a class="nav-link mt-3" href="home.html">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li>
+                            <a class="nav-link mt-3" href="index.html">Shop</a>
+                        </li>
+
+                        <div class="menu-btns">
+                            <li>
+                                <div id="admin">
+                                    <i id="adminIcon" class="fas fa-user-shield fa-lg my-auto" href="cart.html"></i>
+                                </div>
+                            </li>
+                            <li>
+                                <div id="cart"><i id="cartIcon" data-html=true data-toggle="popover"
+                                        data-content="hey kjbhgkdjfghkurfhkhgkrfhkfjhgkshfbkjsrhbfhdbfksdjbfhksuefhey"
+                                        class="fas fa-shopping-cart fa-lg my-auto"></i><span class="px-auto"
+                                        id="counter"></span>
+                                </div>
+                            </li>
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </section>
+    <section>
+        <div id="title">
+            <h1 >Cart</h1>
+            <hr>
+        </div>
+        <div class="flex-container">
+            <div id="cart-table">
+                <table class="cart-table no-gutters">
+                    <thead id="thead">
+
+                    </thead>
+                    <tbody id="tbody">
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="mb-5" id="checkingout">
+                <table id="checkout-table">
+                    <tbody id="checkout">
+
+                    </tbody>
+                </table>
+                <div id="checkingoutBtn"></div>
+            </div>
+            <div id="emptyCart">
+
+            </div>
+        </div>
+    </section>
+    <script src="../js/cart.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,195 @@
+html, body {
+    padding: 0;
+    margin: 0;
+    overflow-x: hidden;
+    font-family: 'Literata', serif!important;
+}
+
+/* ::-webkit-scrollbar {
+    display: none;
+} */
+
+::selection {
+    background: rgba(230, 152, 51, 0.411);
+    /* WebKit/Blink Browsers */
+}
+
+::-moz-selection {
+    background: rgba(230, 152, 51, 0.808);
+    /* Gecko Browsers */
+}
+#admin, #cart{
+    display: flex;
+    justify-content: center;
+    width: 5em;
+    height:3em;
+    text-align: center;
+}
+#admin:hover, #cart:hover{
+    box-shadow: 2px 2px 6px rgba(26, 22, 1, 0.5);
+    border-radius: 2px;
+    transition-duration: .9s;
+}
+.menu-btns {
+    position: absolute;
+    right: 2em;
+    margin-top: 1em;
+}
+.menu-btns button{
+    background-color: transparent;
+    height: 3em;
+    width: 5em;
+    border: none;
+}
+.cart{
+    margin-left: 2em;
+}
+
+a{
+    color: black;
+}
+a{
+    color: black;
+}
+a:hover{
+    color: rgb(240, 216, 84);
+    transition-duration: .5s;
+}
+
+#counter {
+    position: absolute;
+    bottom: 2em;
+    left: 13em;
+    border-radius: 50%;
+    background-color: rgba(230, 152, 51, 0.808);
+    padding: .3em;
+    font-size: 10px;
+    text-align: center;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+li {
+    float: left;
+}
+.nav-link{
+    font-size: 2em;
+}
+.navigation{
+    position: sticky;
+    background-color: rgba(12, 149, 7, 0.041)
+}
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+  }
+.mainSection {
+    /* background: linear-gradient( rgba(71, 71, 71, 0.9), rgba(246, 246, 246, 0.356)), url("https://cristina-cristache.com/assets/iStock-1015545230.jpg"); */
+    /* height: 91.2vh; */
+    font-family: 'Open Sans', sans-serif!important;
+}
+
+#description {
+    font-size: 16px;
+    line-height: 1em;
+}
+
+.detail-img {
+    height: 450px;
+    width: auto;
+    margin-left: 10%;
+}
+
+.details-box {
+    margin: 5em 0 0 0;
+}
+
+#product-name {
+    font-weight: 900;
+}
+
+#price {
+    font-size: 1.5em;
+}
+
+.facts {
+    border: 1px solid rgba(128, 128, 128, 0.404);
+    border-radius: 1em;
+    padding: 0 .4em 0 .4em;
+    height: 100px;
+    margin: 10px 0;
+}
+
+#description>p {
+    font-size: 20px;
+}
+
+#addToCart {
+    width: 10em;
+    height: 2em;
+    background-color: rgb(240, 216, 84);
+    box-shadow: 2px 4px 6px 1px rgba(240, 217, 84, 0.459);
+    border: 1px solid rgb(240, 216, 84);
+    border-radius: 1em;
+    margin-left: 1em;
+}
+
+#addToCart:focus {
+    outline-style: none;
+}
+
+#addToCart:hover {
+    background-color: rgba(240, 217, 84, 0.726);
+    border: 1px solid rgba(240, 217, 84, 0.726);
+    transition-duration: 500ms;
+}
+
+#quantity {
+    margin-left: 10px!important;
+    border: none;
+    width: 2em;
+    text-align: center;
+}
+
+.price {
+    margin-top: 4em;
+}
+
+.add-value {
+    background-color: rgb(243, 241, 241);
+    box-shadow: 2px 1px 2px 1px rgba(240, 217, 84, 0.109);
+    border: none;
+    border-radius: 50%;
+    outline: none;
+}
+
+.add-value:hover {
+    background-color: rgb(240, 216, 84);
+    box-shadow: 2px 4px 6px 1px rgba(240, 217, 84, 0.459);
+    transition-duration: 500ms;
+}
+
+.add-value:focus {
+    outline-style: none;
+}
+
+#description>.fa-check {
+    float: left;
+    color: rgb(223, 171, 0);
+}
+
+.fa-cart-arrow-down {
+    margin-left: .3em;
+}
+
+
+
+#description>p {
+    margin-left: 3em!important;
+}

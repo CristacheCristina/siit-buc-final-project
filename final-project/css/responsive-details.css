@@ -1,0 +1,98 @@
+
+@media screen and (min-width: 766px) and (max-width: 840px) {
+    .facts {
+        font-size: 9.5px;
+    }
+    .details {
+        display: none;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .details p {
+        font-size: 13px;
+    }
+    .menu-btns {
+        position: absolute;
+        right: 1em;
+        bottom: .5px;
+    }
+    .nav-link {
+        font-size: 15px;
+    }
+    .title {
+        margin-left: 1em;
+    }
+    #admin {
+        width: 2em;
+    }
+    #counter {
+        left: 8em;
+    }
+   
+}
+
+@media (max-width: 500.98px) {
+    .details p {
+        font-size: 11px;
+    }
+}
+
+@media screen and (max-width: 767.98px) and (min-width: 575.99px) {
+    .details p {
+        font-size: 14px;
+    }
+    .text-details {
+        padding-left: 2em!important;
+    }
+    #addBtnsGroup, .price, #stock, .facts {
+        margin-left: 1em!important;
+    }
+    #product-name {
+        margin-left: .4em
+    }
+    .price {
+        font-size: 16px;
+        font-weight: 600;
+    }
+    .facts {
+        margin-left: 0;
+    }
+   
+}
+
+@media (max-width: 991.98px) and (min-width: 767.99px) {
+    .price {
+        font-size: 16px;
+        font-weight: 600;
+        margin-top: .5;
+    }
+    .details {
+        display: none!important;
+    }
+    .details p {
+        font-size: 12px;
+    }
+    h2 {
+        font-size: 20px;
+    }
+    #description p{
+        font-size: 14px;
+        line-height: 1em;
+    }
+    .image{
+        margin-top: 18%;
+
+    }
+}
+
+@media (max-width: 1199.98px) and (min-width: 991.99px) {
+    .details p {
+        font-size: 14px;
+    }
+    #description p{
+        font-size: 14px;
+        line-height: 1em;
+    }
+    .price{margin-top: 1px;}
+}

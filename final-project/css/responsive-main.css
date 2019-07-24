@@ -1,0 +1,151 @@
+@media screen and (max-width:380px) {
+    img {
+        height: 270px!important;
+        width: auto;
+    }
+    #search-input {
+        width: 10em;
+    }
+    .product-price {
+        margin-top: 1em;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    #banner {
+        background-image: url("https://cristina-cristache.com/assets/main_banner-xs.jpg");
+        height: 100vh;
+        width: auto;
+    }
+    #shopBtn {
+        position: absolute;
+        bottom: 10px;
+        right: 40%;
+        left: 30%;
+        width: 40%;
+        height: 2em!important;
+        border-radius: 5em;
+        background-color: rgb(18, 44, 18);
+    }
+    #brand {
+        /* position: absolute; ; */
+        right: 30%;
+        height: 10%;
+        color: rgb(23, 129, 129);
+    }
+    #h {
+        height: 2em;
+        margin-top: 1em;
+    }
+    .to-cart-btn:hover {
+        background-color: rgba(216, 176, 45, 0.829);
+        border: 1px solid rgba(216, 176, 45, 0.829);
+        transition-duration: 500ms;
+    }
+    @media screen and (min-width: 445px) and (max-width: 930px) {
+        #banner {
+            background-image: url("https://cristina-cristache.com/assets/main-banner-s.jpg");
+            height: 100vh;
+            width: auto;
+        }
+    }
+    @media screen and (min-width: 930px) and (max-width:1440px) {
+        #banner {
+            background-image: url("https://cristina-cristache.com/assets/main_banner.jpg");
+            height: 100vh;
+            width: auto;
+        }
+    }
+    @media screen and (min-width: 1440px) {
+        #banner {
+            background-image: url("https://cristina-cristache.com/assets/main_banner-xl.jpg");
+            height: 100vh;
+            width: auto;
+        }
+    }
+}
+
+@media (max-width: 373px)and (max-width: 445px) {
+    .display-img {
+        width: 250px;
+    }
+    #banner {
+        background-image: url("https://cristina-cristache.com/assets/coil-2.jpg");
+        height: 115vh;
+        width: auto;
+    }
+    #shopBtn {
+        position: absolute;
+        bottom: 10px;
+        right: 30%;
+        left: 30%;
+        width: 40%;
+        height: 2em!important;
+        border-radius: 5em;
+        background-color: rgb(180, 216, 180);
+    }
+    /* #headerMobile{
+    position: absolute;
+    top: 20;
+    display: block;
+} */
+    .product-price {
+        margin-top: 1em;
+    }
+    .to-cart-btn {
+        margin-bottom: 8em!important;
+    }
+}
+
+@media (max-width: 576px) {
+    .menu-btns {
+        position: absolute;
+        right: 1em;
+        top: .1em;
+    }
+    .nav-link {
+        font-size: 15px;
+    }
+    .title {
+        margin-left: 1em;
+    }
+    #admin {
+        width: 2em;
+    }
+    #counter {
+        left: 8em;
+    }
+    .searchInput {}
+}
+
+@media (min-width: 576px) and (max-width: 767px) {
+    #search-input {
+        margin-left:1.4em;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .display-img {
+        height: 250px;
+        width: auto;
+    }
+    h1{
+        font-size: 2em!important;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+    .display-img {
+        height: 240px!important;
+        width: auto;
+    }
+    #search-input {
+        margin-left:14.5em;
+    }
+}
+
+@media (min-width: 1200px) {
+    #search-input {
+        margin-left:20.1em;
+    }
+}

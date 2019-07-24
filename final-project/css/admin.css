@@ -1,0 +1,149 @@
+th, td {
+    border: 1px solid #C8CDD7;
+}
+
+/* 
+body, html {
+    overflow-x: hidden;
+} */
+
+button:focus, input:focus, textarea:focus {
+    outline-style: none;
+}
+
+hr {
+    background-color: #DFAB00;
+    margin-right: 80%;
+    height: .5em;
+    border-radius: .5em;
+}
+
+.title hr {
+    margin-right: 90%;
+}
+
+input {
+    width: 90vw;
+    height: 5em;
+}
+
+input:focus {
+    outline-color: rgba(223, 171, 0, 0.609);
+}
+
+textarea {
+    width: 100%;
+}
+
+img {
+    height: 50px;
+    width: auto;
+}
+
+.title {
+    margin: 10% 0 0 21%;
+}
+
+.back-btns {
+    text-align: left;
+    margin: 3% 0 6% 69%;
+}
+
+.util-btns {
+    margin: 3% 0 6% 49%;
+}
+
+.back-btns i {
+    margin-right: .3em;
+}
+
+.back-btns button, .util-btns button {
+    background-color: #DFAB00;
+    border-radius: .3em;
+    height: 3em;
+    width: 10em;
+}
+
+#addBtn:hover, #saveChanges:hover, .back-btns button:hover {
+    background-color: rgba(223, 171, 0, 0.555);
+    border: none;
+}
+
+label {
+    margin-top: 1.5em;
+}
+
+#saveChanges {
+    background-color: #DFAB00;
+    border-radius: .3em;
+    height: 3em;
+    width: 30%;
+    border: 1px solid rgb(223, 171, 0);
+    margin: 6% 70% 4% 0;
+}
+
+#addBtn {
+    background-color: #DFAB00;
+    border-radius: .3em;
+    height: 3em;
+    width: 30%;
+    border: 1px solid rgb(223, 171, 0);
+    margin: 6% 0 4% 21.5%;
+}
+
+button {
+    background-color: white;
+    border-radius: 5em;
+    border: 1px solid white;
+}
+
+button:focus {
+    outline-style: none;
+}
+
+.editBtn:hover {
+    background-color: rgba(127, 127, 202, 0.541);
+    border: none;
+    border-radius: 5px;
+    transition-duration: 700ms;
+}
+
+.deleteBtn:hover {
+    background-color: rgba(201, 36, 36, 0.507);
+    border: none;
+    border-radius: 5px;
+    transition-duration: 700ms
+}
+
+@media (max-width: 540px) {
+    .title {
+        margin-left: .5vw;
+    }
+    .util-btns {
+        margin-left: 69%;
+    }
+    .back-btns{
+        margin-left: 50%;
+    }
+}
+@media (max-width: 505px) and (max-width: 541px){
+    .util-btns {
+        margin-left: 50%!important;
+    }
+}
+@media (max-width: 768px) {
+    .util-btns {
+        margin-left: 36.3%;
+    }
+    .title {
+       margin-left: 0;
+    }
+}
+
+@media (max-width: 992px) {
+    /* .title {
+       
+    }*/
+} 
+
+@media (max-width: 1200px) { }

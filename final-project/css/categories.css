@@ -1,0 +1,30 @@
+.fa-shopping-cart {
+    position: absolute;
+    right: 4em;
+    top: .4em;
+    bottom: .4em;
+    size: 15px;
+}
+
+.fa-user-shield {
+    position: absolute;
+    right: 6em;
+    top: .4em;
+}
+
+#upperBanner {
+    padding: 1em;
+}
+
+#hamMenu {
+    position: absolute;
+    left: 2;
+    top: .4em;
+    outline-style: none;
+}
+
+.flex-container{
+    display: flex;
+    justify-content: flex-start;
+}
+

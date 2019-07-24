@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+    <link rel="stylesheet" href="../css/admin.css">
+    <script src="https://kit.fontawesome.com/9bca85d03b.js"></script>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="../css/admin.css">
+    <title>Add Product</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 justify-content-center">
+                <div class="back-btns">
+                    <button id="backToAdmin"><i class="fas fa-user-shield fa-lg"></i>Back to Admin</button>
+                    <button id="backToShop"><i class="fas fa-shopping-basket fa-lg"></i>Back to Shop</button>
+                </div>
+                <h1>Add CBD products</h1>
+                <hr>
+                <form>
+                    <label for="name">Name: </label>
+                    <input class="form-control" type="text" id="name">
+                    <label for="image">Image URL: </label>
+                    <input class="form-control" type="text" id="image">
+                    <label for="image2">Image URL: </label>
+                    <input class="form-control" type="text" id="image2">
+
+
+                    <label for="category">Category: </label>
+                    <select class="form-control" type="text" id="category">
+                        <option>Capsules</option>
+                        <option>Gummies</option>
+                        <option>Topicals</option>
+                        <option>Oils</option>
+                    </select>
+
+
+
+                    <div><label for="description">Description: </label></div>
+                    <textarea type="text" id="description"></textarea>
+
+
+                    <div><label for="price">Price: </label></div>
+                    <input class="form-control" type="text" id="price">
+
+
+                    <label for="stock">Stock: </label>
+                    <input class="form-control" type="text" id="stock">
+
+
+                    <label for="dose">Dose: </label>
+                    <input class="form-control" type="text" id="dose">
+
+
+                    <label for="quantity">Quantity: </label>
+                    <input class="form-control" type="text" id="quantity">
+
+
+                    <label for="gmo"></label>GMO:
+                    <input class="form-control" type="text" id="gmo">
+
+
+                    <label for="totalCbd"></label>Total CBD:
+                    <input class="form-control" type="text" id="totalCbd">
+
+
+
+                    <button class="mx-auto mt-2" id="addBtn">Add Product</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="../js/add.js"></script>
+</body>
+
+</html>
