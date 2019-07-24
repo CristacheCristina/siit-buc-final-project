@@ -21,11 +21,11 @@ li {
     text-align: center;
 }
 
-#admin:hover, #cart:hover {
+/* #admin:hover, #cart:hover {
     box-shadow: 2px 2px 6px rgba(26, 22, 1, 0.5);
     border-radius: 2px;
     transition-duration: .9s;
-}
+} */
 
 .menu-btns {
     position: absolute;
@@ -41,11 +41,11 @@ li {
 }
 
 .nav-link {
-    font-size: 1em;
+    font-size: 1.5em;
 }
 
 .navigation {
-    background-color: rgba(12, 149, 7, 0.02)
+    background-color: rgba(12, 149, 7, 0.02);
 }
 
 .menu-btns {

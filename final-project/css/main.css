@@ -32,9 +32,9 @@ a:hover {
     transition-duration: .5s;
 }
 
-.navigation {
+/* .navigation {
     background-color: rgba(12, 149, 7, 0.02)
-}
+} */
 
 #admin, #cart {
     display: flex;
@@ -44,10 +44,10 @@ a:hover {
     text-align: center;
 }
 
-#admin:hover, #cart:hover {
+/* #admin:hover, #cart:hover {
     box-shadow: 2px 2px 6px rgba(240, 217, 84, 0.5);
     border-radius: 2px;
-}
+} */
 
 .menu-btns {
     position: absolute;
@@ -62,14 +62,14 @@ a:hover {
     border: none;
 }
 
-.nav-link {
-    font-size: 2em;
+/* .nav-link {
+    font-size: .5em;
+} */
+
+.navigation {
+    background-color: rgba(12, 149, 7, 0.02);
 }
 
-#navigation {
-    height: 5em;
-    background-color: rgba(230, 152, 51, 0.808);
-}
 
 select {
     position: absolute;

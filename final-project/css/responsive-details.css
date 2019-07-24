@@ -80,10 +80,10 @@
         font-size: 14px;
         line-height: 1em;
     }
-    .image{
+    /* .image{
         margin-top: 18%;
 
-    }
+    } */
 }
 
 @media (max-width: 1199.98px) and (min-width: 991.99px) {
