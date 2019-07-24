@@ -83,7 +83,7 @@ function counterUpdate() {
 function displayDetails(obj) {
     var details = detailedProduct.description.split(/\n/);
     var newDetails = details.map(function (elem) {
-        return `<i class="fas fa-check" style="float:left"></i><p>${elem}</p>`;
+        return `<i class="fas fa-check ml-2" style="float:left"></i><p>${elem}</p>`;
     }).join('');
 
     document.querySelector(".mainSection").innerHTML = `  
@@ -120,7 +120,7 @@ function displayDetails(obj) {
          <div class= "price ml-2" ><p >$${obj.price}</p></div>
          <div class="my-4" id = "description">${newDetails}</div>
          <div id = "stock" class="ml-2"><span style="font-weight:600">Stock:</span> ${obj.stock}</div>
-         <div id="addBtnsGroup" class="my-3 ml-2"><button class = "add-value" id = "decrement">-</button><input type = "text" value = 1  id = "quantity"><button class = "add-value" id = "increment">+</button><button id = "addToCart">Add to cart</button></div>
+         <div id="addBtnsGroup" class="my-3 ml-2"><i class = "fas fa-arrow-circle-left fa-lg" id = "decrement"></i><input type = "text" value = 1  id = "quantity"><i class = "fas fa-arrow-circle-right fa-lg" id = "increment"></i><button id = "addToCart">Add to cart</button></div>
          <div class="row details ">
              <div class="col-4 col-sm-4 col-md-4 col-md-4 col-lg-4 facts-border">
                  <div class = "facts">

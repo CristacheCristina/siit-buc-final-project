@@ -5,18 +5,12 @@ html, body {
     font-family: 'Literata', serif!important;
 }
 
-/* ::-webkit-scrollbar {
-    display: none;
-} */
-
 ::selection {
     background: rgba(230, 152, 51, 0.411);
-    /* WebKit/Blink Browsers */
 }
 
 ::-moz-selection {
     background: rgba(230, 152, 51, 0.808);
-    /* Gecko Browsers */
 }
 #admin, #cart{
     display: flex;
@@ -25,11 +19,7 @@ html, body {
     height:3em;
     text-align: center;
 }
-/* #admin:hover, #cart:hover{
-    box-shadow: 2px 2px 6px rgba(26, 22, 1, 0.5);
-    border-radius: 2px;
-    transition-duration: .9s;
-} */
+
 .menu-btns {
     position: absolute;
     right: 2em;
@@ -58,11 +48,12 @@ a:hover{
 
 #counter {
     position: absolute;
-    bottom: 2em;
-    left: 13em;
+    bottom: 2.5em;
+    left: 8em;
+    height: 1.5em;
+    width: 1.5em;
     border-radius: 50%;
     background-color: rgba(230, 152, 51, 0.808);
-    padding: .3em;
     font-size: 10px;
     text-align: center;
 }
@@ -90,8 +81,6 @@ li {
     width: 100%;
   }
 .mainSection {
-    /* background: linear-gradient( rgba(71, 71, 71, 0.9), rgba(246, 246, 246, 0.356)), url("https://cristina-cristache.com/assets/iStock-1015545230.jpg"); */
-    /* height: 91.2vh; */
     font-family: 'Open Sans', sans-serif!important;
 }
 
@@ -150,9 +139,17 @@ li {
     border: 1px solid rgba(240, 217, 84, 0.726);
     transition-duration: 500ms;
 }
+.fa-arrow-circle-left, .fa-arrow-circle-right {
+    color: gray;
+}
+
+.fa-arrow-circle-left:hover, .fa-arrow-circle-right:hover {
+    color: rgba(230, 152, 51, 0.808);
+    transition-duration: .4s;
+}
 
 #quantity {
-    margin-left: 10px!important;
+    
     border: none;
     width: 2em;
     text-align: center;

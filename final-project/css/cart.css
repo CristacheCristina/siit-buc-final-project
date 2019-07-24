@@ -70,10 +70,7 @@ button:focus, input:focus {
     outline-style: none
 }
 
-input {
-    background-color: white;
-    width: 3em;
-}
+
 
 .add-value {
     border: none;
@@ -93,11 +90,12 @@ hr {
 
 #counter {
     position: absolute;
-    bottom: 2em;
+    bottom: 2.5em;
     left: 8em;
+    height: 1.5em;
+    width: 1.5em;
     border-radius: 50%;
     background-color: rgba(230, 152, 51, 0.808);
-    padding: .3em;
     font-size: 10px;
     text-align: center;
 }
@@ -113,9 +111,10 @@ hr {
 
 .quantityTd input {
     margin-left: 0;
-    width: 1em;
+    width: 1.3em;
     border: none;
     text-align: center!important;
+    background-color: white;
 }
 
 .fa-times {
@@ -200,17 +199,18 @@ hr {
     }
     #counter {
         left: 5em;
-        height: 1.7em;
-        width: 1.7em;
-        padding-bottom: 1em;
-        padding: 0;
+        margin-bottom: -.5em;
+        
     }
+
     #checkout-table {
         width: 40vw;
     }
+
     #checkoutBtn {
         width: 40vw;
     }
+    
     #checkingout {
         width: 40vw;
         margin: 4em 5vw 0 55vw;
@@ -240,10 +240,7 @@ hr {
     .shipping {
         font-size: 13px;
     }
-    #counter{
-        width:2em;
-        height: 1.7em;
-    }
+   
 }
 
 @media screen and (max-width:770px) {
@@ -253,7 +250,5 @@ hr {
         border-radius: 6px;
         position: absolute;
     }
-    #quantityTd {
-        width: 5em;
-    }
+    
 }
