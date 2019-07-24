@@ -141,9 +141,9 @@ button:focus {
 }
 
 @media (max-width: 992px) {
-    /* .title {
-       
-    }*/
+    .title {
+        margin: 10% 0 0 21%;
+    }
 } 
 
 @media (max-width: 1200px) { }

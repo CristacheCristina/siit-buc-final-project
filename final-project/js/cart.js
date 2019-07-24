@@ -101,7 +101,7 @@ function displayCart() {
                 <td class = "name"><a href = "details.html?id=${key}">${cart[key].name}</a></td>
                 <td class = "price" id = "${key}">$${cart[key].price}</td>
                 <td>${cart[key].stock}</td>
-                <td class = "quantityTd"><button data-id = "decrement${key}" class = "decrement add-value my-auto" onclick = "reduce(${key});">-</button><input type = "text" value = ${cart[key].quantity} data-id = "input${key}" class = "quantity" disabled ><button data-id = "increment${key}" class = "increment add-value my-auto" onclick = "increase(${key})">+</button></td>
+                <td class = "quantityTd"><i data-id = "decrement${key}" class = "fas fa-arrow-circle-left decrement add-value my-auto" onclick = "reduce(${key});"></i><input type = "text" value = ${cart[key].quantity} data-id = "input${key}" class = "mx-1 quantity" disabled ><i data-id = "increment${key}" class = "fas fa-arrow-circle-right increment add-value my-auto" onclick = "increase(${key})"></i></td>
                 <td >$<span id = "total${key}" class = "total">${cart[key].price * cart[key].quantity}</span></td>
             </tr>
             `;

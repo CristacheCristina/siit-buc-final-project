@@ -88,7 +88,7 @@ function displayDetails(obj) {
 
     document.querySelector(".mainSection").innerHTML = `  
     <div class="row">
-     <div class="col-12 col-sm-12 col-md-7 col-lg-7 col-xl-6 image details-box">
+     <div class="col-11 col-sm-11 col-md-6 col-lg-6 col-xl-5 image details-box mx-auto">
         <div id="carouselExampleIndicators" class="carousel custom slide" data-ride="carousel">
           <ol class="carousel-indicators">
             <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -115,10 +115,10 @@ function displayDetails(obj) {
        
     </div>
     
-     <div class="col-12 col-sm-12 col-md-5 col-lg-5 col-xl-6 details-box text-details">
+     <div class="col-11 col-sm-11 col-md-6 col-lg-6 col-xl-6 details-box text-details mx-auto">
          <h2 id = "product-name" class="ml-2">${obj.name}</h2>
          <div class= "price ml-2" ><p >$${obj.price}</p></div>
-         <div class="my-5" id = "description">${newDetails}</div>
+         <div class="my-4" id = "description">${newDetails}</div>
          <div id = "stock" class="ml-2"><span style="font-weight:600">Stock:</span> ${obj.stock}</div>
          <div id="addBtnsGroup" class="my-3 ml-2"><button class = "add-value" id = "decrement">-</button><input type = "text" value = 1  id = "quantity"><button class = "add-value" id = "increment">+</button><button id = "addToCart">Add to cart</button></div>
          <div class="row details ">

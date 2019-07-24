@@ -39,7 +39,7 @@ a:hover {
 #admin, #cart {
     display: flex;
     justify-content: center;
-    width: 5em;
+    width: 3em;
     height: 3em;
     text-align: center;
 }
@@ -109,7 +109,7 @@ li {
 #counter {
     position: absolute;
     bottom: 2em;
-    left: 13em;
+    left: 8em;
     border-radius: 50%;
     background-color: rgba(230, 152, 51, 0.808);
     padding: .3em;

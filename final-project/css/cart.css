@@ -16,7 +16,7 @@ li {
 #admin, #cart {
     display: flex;
     justify-content: center;
-    width: 5em;
+    width: 3em;
     height: 3em;
     text-align: center;
 }
@@ -69,9 +69,12 @@ li a:hover {
 button:focus, input:focus {
     outline-style: none
 }
-input{
+
+input {
     background-color: white;
+    width: 3em;
 }
+
 .add-value {
     border: none;
     margin-left: 0%;
@@ -84,20 +87,32 @@ hr {
     border-radius: .5em;
 }
 
-.fa-shopping-cart {
-    size: 15px;
+.fa-shopping-cart:hover, .fa-user-shield:hover {
+    color: rgb(93, 93, 93);
 }
 
 #counter {
+    position: absolute;
+    bottom: 2em;
+    left: 8em;
     border-radius: 50%;
     background-color: rgba(230, 152, 51, 0.808);
+    padding: .3em;
     font-size: 10px;
-    width: 1.5em;
-    height: 40%;
+    text-align: center;
+}
+
+.fa-arrow-circle-left, .fa-arrow-circle-right {
+    color: gray;
+}
+
+.fa-arrow-circle-left:hover, .fa-arrow-circle-right:hover {
+    color: rgba(230, 152, 51, 0.808);
+    transition-duration: .4s;
 }
 
 .quantityTd input {
-    margin-left: 1em;
+    margin-left: 0;
     width: 1em;
     border: none;
     text-align: center!important;
@@ -127,25 +142,23 @@ a, a:hover, a:visited {
     border-radius: 50%;
 }
 
-.increment {
-    float: right;
-}
-
 .menu-btns button {
     background-color: transparent;
     height: 2em;
     width: 4em;
 }
+
 hr {
     background-color: #DFAB00;
     margin-right: 95%;
     height: .5em;
     border-radius: .5em;
 }
-#title{
-    margin: 3vw 0 0 5vw;
 
+#title {
+    margin: 3vw 0 0 5vw;
 }
+
 #checkout-table {
     width: 30vw;
 }
@@ -169,7 +182,7 @@ hr {
     transition-duration: 500ms;
 }
 
-@media (max-width: 575.98px) {
+@media (max-width: 575.98px) and (min-width: 300px) {
     .menu-btns {
         position: absolute;
         top: 1em;
@@ -182,11 +195,14 @@ hr {
     .title {
         margin-left: 1em;
     }
+    hr {
+        margin-left: 1em;
+    }
     #admin {
         width: 2em;
     }
     #counter {
-        left: 8em;
+        left: 5em;
     }
 }
 
@@ -218,7 +234,7 @@ hr {
         height: .3em;
         border-radius: 6px;
         position: absolute;
-        left: .8em;
+        
     }
     #quantityTd {
         width: 5em;
