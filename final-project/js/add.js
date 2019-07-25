@@ -13,8 +13,7 @@ document.querySelector('#addBtn').addEventListener("click", (event) => {
     let decription = document.querySelector('#description').value;
     let dose = document.querySelector('#dose').value;
     let GMO = document.querySelector('#gmo').value;
-    let image = document.querySelector('#image').value;
-    let image2 = document.querySelector('#image2').value;
+    let images = document.querySelector('#images').value;
     let name = document.querySelector('#name').value;
     let price = document.querySelector('#price').value;
     let quantity = document.querySelector("#quantity").value;
@@ -25,8 +24,7 @@ document.querySelector('#addBtn').addEventListener("click", (event) => {
         decription !== '' &&
         dose !== '' &&
         GMO !== '' &&
-        image !== '' &&
-        image2 !== '' &&
+        images !== '' &&
         name !== '' &&
         price !== '' &&
         quantity !== '' &&
@@ -37,8 +35,7 @@ document.querySelector('#addBtn').addEventListener("click", (event) => {
             decription: decription,
             dose: dose,
             GMO: GMO,
-            image: image,
-            image2: image2,
+            images: images,
             name: name,
             price: price,
             quantity:quantity,

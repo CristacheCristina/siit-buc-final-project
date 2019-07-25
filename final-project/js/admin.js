@@ -38,18 +38,19 @@ function display(obj) {
     document.querySelector('#adminAdd').addEventListener('click', () => {
         location.assign("add.html")
     })
-    
-    for (key in obj)
+
+    for (key in obj) {
+        var images = products[key].images.split(" ");
         document.querySelector("#items").innerHTML += `
                 <tr>
-                    <td class="d-none d-sm-none d-md-block"><img src = "${obj[key].image}"></td>
+                    <td class="d-none d-sm-none d-md-block"><img src = "../images/${images[0]}"></td>
                     <td>${obj[key].name}</td>
                     <td>${obj[key].price}</td>
                     <td>${obj[key].stock}</td>
                     <td><button class="editBtn" id = "edit${key}" onclick = "edit('${key}')">Edit</button></td>
                     <td><button class="deleteBtn" id = "delete${key}" onclick = "remove('${key}')" >Delete</button></td>
                 </tr>
-                `
+                `}
 }
 
 async function remove(key) {

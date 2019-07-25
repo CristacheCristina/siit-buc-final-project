@@ -15,30 +15,25 @@ window.onload = () => {
         window.location.assign("admin.html")
     });
 
-    // $('[data-toggle="popover"]').popover({
-    //     placement: 'bottom',
-    //     trigger: 'hover',
-    //     content: popperInner
-    // });
+    // fetch(`https://online-shop-a4050.firebaseio.com/${id}.json`)
+    //     .then(response => {
 
-    fetch(`https://online-shop-a4050.firebaseio.com/${id}.json`)
-        .then(response => {
+    //         if (!response.ok)
+    //             throw Error(response.statusText);
+    //         return response.json();
+    //     })
+    //     .then(response => {
+    //         window.detailedProduct = response;
+    //         window.detailedProductId = detailedProduct.ID;
+    //         document.body.style.height = '';
+    //         document.body.style.background = '';
+    //         document.body.style.backgroundPosition = "";
+    //         displayDetails(detailedProduct);
+    //         $('.carousel').carousel();
+    //         counterUpdate();
 
-            if (!response.ok)
-                throw Error(response.statusText);
-            return response.json();
-        })
-        .then(response => {
-            window.detailedProduct = response;
-            window.detailedProductId = detailedProduct.ID;
-            document.body.style.height = '';
-            document.body.style.background = '';
-            document.body.style.backgroundPosition = "";
-            displayDetails(detailedProduct);
-            $('.carousel').carousel();
-            counterUpdate();
-
-        });
+    //     });
+    
 
 
 
@@ -150,21 +145,6 @@ function displayDetails(obj) {
     </div>
     `;
 
-
-
-    // descriptionDiv = document.querySelector("#description");
-    // node = document.createElement("I");
-    // node.classList.add("fas");
-    // node.classList.add("fa-check");
-    // node.style.float = "left";
-    // var count = (descriptionDiv.childNodes.length * 2);
-    // for (i = 0; i < count; i += 2) {
-    //     console.log(descriptionDiv.childNodes[i]);
-    //     descriptionDiv.insertBefore(node.cloneNode(true), descriptionDiv.childNodes[i]);
-    // }
-
-
-
     document.querySelector('#addToCart').onmouseover = () => {
         if (detailedProduct.stock === 0) {
             document.querySelector("#addToCart").style.transitionDuration = "2000"
@@ -258,7 +238,7 @@ function addToCart() {
                 }
             } else {
                 window.cart[id] = {
-                    image: detailedProduct.image,
+                    images: detailedProduct.images,
                     name: detailedProduct.name,
                     price: detailedProduct.price,
                     stock: detailedProduct.stock - desiredQuantity,

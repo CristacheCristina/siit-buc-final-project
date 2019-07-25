@@ -21,9 +21,6 @@ async function getUpdateAndDisplay() {
         var getDb = await fetch(`https://online-shop-a4050.firebaseio.com/.json`);
         window.products = await getDb.json();
         for (key in cart) {
-            cart[key].stock = products[key].stock;
-        }
-        for (key in cart) {
             if (!products[key]) {
                 Swal.fire({
                     title: 'Something went wrong!',
@@ -132,7 +129,7 @@ function cartReset() {
 function increase(key) {
     var desiredQuantity = document.querySelector(`[data-id = input${key}]`).value * 1;
     viewportWidth = window.innerWidth || document.documentElement.clientWidth;
-    if (products[key].stock > desiredQuantity) {
+    if (products[key].stock >= desiredQuantity) {
         desiredQuantity++;
         document.querySelector(`[data-id = input${key}]`).value = desiredQuantity;
         cart[key].quantity += 1;

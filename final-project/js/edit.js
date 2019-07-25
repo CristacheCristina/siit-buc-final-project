@@ -29,8 +29,7 @@ window.onload = () => {
             document.querySelector("#description").value = response.description;
             document.querySelector("#dose").value = response.dose;
             document.querySelector("#gmo").value = response.GMO;
-            document.querySelector("#image").value = response.image;
-            document.querySelector("#image2").value = response.image2;
+            document.querySelector("#images").value = response.images;
             document.querySelector("#name").value = response.name;
             document.querySelector("#price").value = response.price;
             document.querySelector("#quantity").value = response.quantity;
@@ -47,8 +46,7 @@ async function updateDB(event) {
     let decription = document.querySelector('#description').value;
     let dose = document.querySelector('#dose').value;
     let gmo = document.querySelector('#gmo').value;
-    let image = document.querySelector('#image').value;
-    let image2 = document.querySelector('#image2').value;
+    let images = document.querySelector('#images').value;
     let name = document.querySelector('#name').value;
     let price = document.querySelector('#price').value;
     let quantity = document.querySelector("#quantity").value;

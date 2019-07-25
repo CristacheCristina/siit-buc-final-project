@@ -197,11 +197,11 @@ hr {
     #admin {
         width: 2em;
     }
-    #counter {
+    /* #counter {
         left: 5em;
         margin-bottom: -.5em;
         
-    }
+    } */
 
     #checkout-table {
         width: 40vw;
