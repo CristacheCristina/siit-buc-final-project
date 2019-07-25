@@ -64,12 +64,13 @@ function counterUpdate() {
 }
 
 function display() {
+    var images = products[key].images.split(" ");
     // document.querySelector("#items-display").innerHTML = '';
     document.querySelector("#items-display").innerHTML += `
                     <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 text-center ">
                         <div class = "display-item">
                             <div>
-                                <img class = "display-img card-img-top" onclick = "details(${key})" src="${products[key].image}" alt="">
+                                <img class = "display-img card-img-top" onclick = "details(${key})" src="${images[0]}" alt="">
                             </div>
                             <div id = 'h'><h6  class = "product-name" >${products[key].name}</h6></div>
                             <div ><p class = "product-price mx-auto">$${products[key].price}</p></div>

@@ -50,8 +50,8 @@ a:hover {
 } */
 .menu-btns {
     position: absolute;
-    right: 6.5em;
-    margin-top: 1em;
+    right: 2em;
+    margin-top: .5em; 
 }
 
 .menu-btns button {
