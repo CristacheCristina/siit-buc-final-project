@@ -41,12 +41,8 @@ async function getUpdateAndDisplay() {
         document.body.style.background = '';
         document.body.style.backgroundPosition = '';
         if (Object.keys(cart).length > 0) {
-            for (key in cart) {
-                cart[key].stock = products[key].stock;
-                console.log(cart[key]);
-                displayCart();
-                counterUpdate();
-            }
+            displayCart();
+            counterUpdate();
         } else {
             console.log(cart);
             cartReset();
@@ -66,8 +62,9 @@ function counterUpdate() {
         document.querySelector("#counter").innerHTML = 0;
     }
 }
+
 function displayCart() {
-    var images = cart[key].images.split(" ");
+
     document.querySelector("thead").innerHTML = '';
     document.querySelector('tbody').innerHTML = '';
     document.querySelector("#checkout").innerHTML = '';
@@ -83,19 +80,10 @@ function displayCart() {
                 <th>Total</th>
             </tr>
         `;
-        var width = window.innerWidth
-            || document.documentElement.clientWidth
-            || document.body.clientWidth;
-
-        if (width < 600) {
-            let ths = document.querySelectorAll("th");
-            for (elem in ths) {
-                elem.innerHTML += ":"
-            }
-        }
         var total = 0;
         window.totalItems = 0;
         for (key in cart) {
+            var images = cart[key].images.split(" ");
             document.querySelector('tbody').innerHTML += `
             <tr>
                 <td class= "x"><div id = "x-icon" onclick = "remove(${key})"><i class="fas fa-times" id = "icon${key}"></i></div></td>
@@ -132,6 +120,7 @@ function displayCart() {
         }
     }
 }
+
 function cartReset() {
     document.querySelector("#title").style.display = "none";
     document.querySelector('#tbody').innerHTML = '<div class="  ml-2"><h1 id="empty-cart">No items in your cart!</h1><hr></div>';
@@ -179,6 +168,7 @@ function reduce(key) {
         cartReset();
     }
 }
+
 function remove(key) {
     delete cart[key];
     localStorage.setItem('cart', JSON.stringify(cart));
@@ -288,7 +278,12 @@ function checkOut() {
                                     return response.json();
                                 })
                                 .then(response => window.products = response)
-                                .then(() => { syncCart(); displayCart() })
+                                .then(() => {
+                                    for (key in cart) {
+                                        cart[key].stock = products[key].stock
+                                    }
+                                    displayCart();
+                                })
                         })
                 }
             }
