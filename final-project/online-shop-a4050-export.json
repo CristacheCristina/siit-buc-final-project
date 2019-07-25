@@ -4,11 +4,11 @@
     "category": "oils",
     "description": "Subtle, citrus flavor\nSourced from 100% organic Oregon hemp\nVegan, non-GMO\nCertified to be free from any pesticides, herbicides, solvents, heavy metals, or chemical fertilizers\nNon-intoxicating hemp formula (less than 0.2% THC)\nLab tested for safety, purity, and potency",
     "dose": "25mg of CBD / 1/2 of dropper",
-    "images": "Citrus-Oil-1000mg-min.jpg Citrus-Oil-1000mg.jpg",
+    "images": "citrus-1000-min.jpg citrus-1000.jpg",
     "name": "1000mg / 30ml Citrus CBD Tincture",
     "price": "135.00",
     "quantity": "30 ml / 40 serving per container",
-    "stock": "653",
+    "stock": 654,
     "totalCbd": "1000mg"
   },
   "1": {
@@ -16,11 +16,11 @@
     "category": "oils",
     "description": "Fresh mint flavor\nSourced from 100% organic Oregon hemp\nVegan, non-GMO\nCertified to be free from any pesticides, herbicides, solvents, heavy metals, or chemical fertilizers\nRelaxing, non-intoxicating hemp formula (less than 0.2% THC)\nLab tested for safety, purity, and potency",
     "dose": "25mg of CBD / 1/2 of dropper",
-    "image": "Mint-Oil-1000mg-min.jpg Mint-Oil-1000mg.jpg",
+    "images": "mint-1000-min.jpg mint-1000.jpg",
     "name": "1000mg / 30ml Mint CBD Tincture",
     "price": "135.00",
     "quantity": " 40 serving per container",
-    "stock": "0",
+    "stock": 0,
     "totalCbd": "1000mg"
   },
   "2": {
@@ -28,11 +28,11 @@
     "category": "oils",
     "description": "Natural, “earthy” hemp flavor\nSourced from 100% organic Oregon hemp\nVegan, non-GMO\nCertified to be free from any pesticides, herbicides, solvents, heavy metals, or chemical fertilizers\nRelaxing, non-intoxicating hemp formula (less than 0.2% THC)\nLab tested for safety, purity, and potency",
     "dose": "25mg of CBD / 1/2 of dropper",
-    "image": "Natural-Oil-1000mg-min.jpg Natural-Oil-1000mg.jpg",
+    "images": "natural-1000-min.jpg natural-1000.jpg",
     "name": "1000mg / 30ml Natural Tincture Full Spectrum CBD Oil",
     "price": "139.00",
     "quantity": "30 ml / 40 serving per container",
-    "stock": "55",
+    "stock": 55,
     "totalCbd": "1000mg"
   },
   "3": {
@@ -40,11 +40,11 @@
     "category": "oils",
     "description": "Subtle, citrus flavor\nSourced from 100% organic Oregon hemp\nVegan, non-GMO\nCertified to be free from any pesticides, herbicides, solvents, heavy metals, or chemical fertilizers\nNon-intoxicating hemp formula (less than 0.2% THC)\nLab tested for safety, purity, and potency",
     "dose": "7.5mg of CBD / 1/2 of dropper",
-    "image": "Citrus-Oil-300mg-min.jpg Citrus-Oil-300mg.jpg",
+    "images": "citrus-300-min.jpg citrus-300.jpg",
     "name": "300mg / 30ml Citrus CBD Tincture",
     "price": "500.00",
     "quantity": "30 ml / 40 serving per container",
-    "stock": "67",
+    "stock": 67,
     "totalCbd": "300mg"
   },
   "4": {
@@ -52,11 +52,11 @@
     "category": "oils",
     "description": "Made from organic hemp\nA non-psychoactive formula (less than 0.2% THC)\nDelicious minty taste\nNo artificial flavorings\nRelaxing, non-intoxicating hemp formula (less than 0.2% THC)\nNon-GMO\nGrown in the state of Oregon\nLab tested to ensure purity\nFree of any harmful chemicals or toxins\n ",
     "dose": "7.5mg of CBD / 1/2 of dropper",
-    "image": "Mint-Oil-300mg-min.jpg Mint-Oil-300mg.jpg",
+    "images": "mint-300-min.jpg mint-300.jpg",
     "name": "300mg / 30ml Mint CBD Tincture",
     "price": "54.00",
     "quantity": "30 ml / 40 serving per container",
-    "stock": "6",
+    "stock": 6,
     "totalCbd": "300mg"
   },
   "5": {
@@ -64,11 +64,11 @@
     "category": "oils",
     "description": "Natural, “earthy” hemp flavor\nEach 1oz / 30mL bottle sourced from organic US hemp\nVegan, non-GMO\nCertified to be free from any pesticides, herbicides, solvents, heavy metals, or chemical fertilizers\nRelaxing, non-intoxicating hemp formula (less than 0.2% THC)\nNon-intoxicating hemp formula (less than 0.3% THC)\nLab tested for safety, purity, and potency",
     "dose": "7.5mg of CBD / 1/2 of dropper",
-    "image": "Natural-jpeg.jpg Natural-oil-300mg.jpg",
+    "images": "natural-300-min.jpg natural-300.jpg",
     "name": "300mg / 30ml Natural CBD Tincture",
     "price": "54.00",
     "quantity": "30 ml / 40 serving per container",
-    "stock": "0",
+    "stock": 0,
     "totalCbd": "300mg"
   },
   "6": {
@@ -76,11 +76,11 @@
     "category": "oils",
     "description": "Subtle, citrus flavor\nSourced from 100% organic Oregon hemp\nVegan, non-GMO\nCertified to be free from any pesticides, herbicides, solvents, heavy metals, or chemical fertilizers\nNon-intoxicating hemp formula (less than 0.2% THC)\nLab tested for safety, purity, and potency",
     "dose": "15mg of CBD / 1/2 of dropper",
-    "image": "Citrus-Oil-600mg-min.jpg Citrus-Oil-600mg.jpg",
+    "images": "citrus-600-min.jpg citrus-600.jpg",
     "name": "600mg / 30ml Citrus CBD Tincture",
     "price": "95.00",
     "quantity": "30 ml / 40 serving per container",
-    "stock": "43",
+    "stock": 43,
     "totalCbd": "600mg"
   },
   "7": {
@@ -88,11 +88,11 @@
     "category": "oils",
     "description": "Made from organic hemp\nA non-psychoactive formula (less than 0.2% THC)\nDelicious minty taste\nNo artificial flavorings\nRelaxing, non-intoxicating hemp formula (less than 0.2% THC)\nNon-GMO\nGrown in the state of Oregon\nLab tested to ensure purity\nFree of any harmful chemicals or toxins",
     "dose": "15mg of CBD / 1/2 of dropper",
-    "image": "Mint-Oil-600mg-min.jpg Mint-Oil-600mg-min.jpg",
+    "images": "mint-600-min.jpg mint-600.jpg",
     "name": "600mg / 30ml Mint CBD Tincture",
     "price": " 95.00",
     "quantity": "30 ml / 40 serving per container",
-    "stock": "5",
+    "stock": 5,
     "totalCbd": "600mg"
   },
   "8": {
@@ -100,11 +100,11 @@
     "category": "capsules",
     "description": "100% Organic\nNon-GMOp\nLab tested for pesticides, herbicides, solvents and chemical fertilizers\nFull-spectrum hemp blend\nNon-psychoactive (contains 0.2% THC or less)",
     "dose": "25mg of CBD per serving",
-    "image": "Capsules-min.jpg Capsules.jpg",
+    "images": "capsules-min.jpg capsules.jpg",
     "name": "CBD Capsules: 750mg [25mg / Capsule]",
     "price": " 83.00",
     "quantity": "30 servings per container",
-    "stock": "1",
+    "stock": 1,
     "totalCbd": "750mg"
   },
   "9": {
@@ -112,11 +112,11 @@
     "category": "topicals",
     "description": "Sourced from 100% organically-grown Oregon hemp (contains 0.2% THC or less)\nLab-tested to be free from pesticides, solvents, chemical fertilizers, and other contaminants\nNon-GMO",
     "dose": "apply as needed",
-    "image": "Topical-Eucalyptus-min.jpg Topical-Eucalyptus.jpg",
+    "images": "topical-eukalyptus-min.jpg topical eukalyptus.jpg",
     "name": "2 OZ CBD TOPICAL SALVE – EUCALYPTUS",
     "price": "80.00",
     "quantity": "59ml",
-    "stock": "0",
+    "stock": 7,
     "totalCbd": "750mg"
   },
   "10": {
@@ -124,11 +124,11 @@
     "category": "topicals",
     "description": " Sourced from 100% organically-grown Oregon hemp (contains 0.2% THC or less)\nLab-tested to be free from pesticides, solvents, chemical fertilizers, and other contaminants\nNon-GMO",
     "dose": "apply as needed",
-    "image": "Topical-Cocoa-Butter-min.jpg Topical-Coconut.jpg",
+    "images": "topical-cocoa-min.jpg topical-cocoa.jpg",
     "name": "CBD Topical Salve: Cocoa Butter [1,500 mg]",
     "price": " 125.00",
     "quantity": "59ml",
-    "stock": "54",
+    "stock": 234,
     "totalCbd": "1500mg"
   },
   "abc": {
@@ -136,11 +136,11 @@
     "category": "gummies",
     "description": " No animal products\nNon-GMO\nOrganic\nLaboratory tested for safety, purity, and potency\nFree from pesticides, solvents, and chemical fertilizers\n25mg CBD per gummie",
     "dose": "50mg CBD per serving / 4.5g (2 gummies)",
-    "image": "Gummies-min.jpg Gummies.jpg",
+    "images": "gummies-min.jpg gummies.jpg",
     "name": "CBD Gummies: 750mg [25mg per Gummy]",
     "price": "55.00",
     "quantity": "15 servings per container",
-    "stock": "3",
+    "stock": 78,
     "totalCbd": "750mg"
   }
 }

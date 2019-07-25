@@ -11,52 +11,53 @@ window.onload = () => {
 
     document.querySelector("#adminIcon").addEventListener("click", () => {
         window.location.assign("admin.html")
-    })
+    });
 
-    fetch(`https://online-shop-a4050.firebaseio.com/.json`)
-        .then(response => {
-            if (!response.ok)
-                throw Error(response.statusText);
-            console.log(response);
-            return response.json();
-        })
-        .then(response => {
-            window.products = response;
-            console.log(response);
-            document.body.style.height = ""
-            document.body.style.background = '';
-            document.body.style.backgroundPosition = '';
-            console.log(response);
-            if (Object.keys(cart).length > 0) {
-                for (key in cart) {
-                    cart[key].stock = products[key].stock;
-                    console.log(cart[key]);
-                    displayCart();
-                    counterUpdate();
-                }
-            } else {
-                console.log(cart);
-                cartReset();
-                counterUpdate();
-            }
+    getUpdateAndDisplay();
 
-        })
-        .catch(error => {
-            console.error(error);
-        });
 }
-
-function syncCart() {
-    for (let key in database) {
-        if (cart[key]) {
-            cart[key] = {
-                ...cart[key],
-                ...database[key]
+async function getUpdateAndDisplay() {
+    try {
+        var getDb = await fetch(`https://online-shop-a4050.firebaseio.com/.json`);
+        window.products = await getDb.json();
+        for (key in cart) {
+            cart[key].stock = products[key].stock;
+        }
+        for (key in cart) {
+            if (!products[key]) {
+                Swal.fire({
+                    title: 'Something went wrong!',
+                    text: `${cart[key].name} is no longer available and we deleted it from your cart!`,
+                    type: 'info',
+                    showConfirmButton: false,
+                    timer: 3000
+                })
+                    .then(() => {
+                        delete cart[key];
+                    })
             }
         }
+        document.body.style.height = ""
+        document.body.style.background = '';
+        document.body.style.backgroundPosition = '';
+        if (Object.keys(cart).length > 0) {
+            for (key in cart) {
+                cart[key].stock = products[key].stock;
+                console.log(cart[key]);
+                displayCart();
+                counterUpdate();
+            }
+        } else {
+            console.log(cart);
+            cartReset();
+            counterUpdate();
+        }
+    } catch (error) {
+        console.error(error)
     }
-    localStorage.setItem("cart", JSON.stringify(cart));
+
 }
+
 function counterUpdate() {
     if (Object.keys(cart).length > 0) {
         document.querySelector("#counter").innerHTML = totalItems;
@@ -66,6 +67,7 @@ function counterUpdate() {
     }
 }
 function displayCart() {
+    var images = cart[key].images.split(" ");
     document.querySelector("thead").innerHTML = '';
     document.querySelector('tbody').innerHTML = '';
     document.querySelector("#checkout").innerHTML = '';
@@ -97,7 +99,7 @@ function displayCart() {
             document.querySelector('tbody').innerHTML += `
             <tr>
                 <td class= "x"><div id = "x-icon" onclick = "remove(${key})"><i class="fas fa-times" id = "icon${key}"></i></div></td>
-                <td class = "image "><a href = "details.html?id=${key}"><img style = "height:100px;width:auto;" src = "${cart[key].image}"></a></td>
+                <td class = "image "><a href = "details.html?id=${key}"><img style = "height:100px;width:auto;" src = "../images/${images[0]}"></a></td>
                 <td class = "name"><a href = "details.html?id=${key}">${cart[key].name}</a></td>
                 <td class = "price" id = "${key}">$${cart[key].price}</td>
                 <td>${cart[key].stock}</td>
@@ -191,15 +193,7 @@ function remove(key) {
     }
 }
 
-function calculateTotal() {
-    var total = 0;
-    for (i = 0; i < Object.keys(cart).length; i++) {
-        total += cart[i].total;
-    }
-    return total;
-}
-
-async function checkOut() {
+function checkOut() {
     var promises = [];
     fetch(`https://online-shop-a4050.firebaseio.com/.json`)
         .then(response => {
@@ -208,6 +202,8 @@ async function checkOut() {
             return response.json();
         })
         .then(response => {
+            // var modified = [];
+            // var deleted = [];
             window.products = response;
             var sufficientStock;
             for (key in cart) {
@@ -217,7 +213,25 @@ async function checkOut() {
                     sufficientStock = false;
                     break;
                 }
+                if (!products[key]) {
+                    Swal.fire({
+                        position: 'top-end',
+                        type: 'info',
+                        title: 'Something went wrong!',
+                        text: `${cart[key].name} is no longer available and we deleted it from your cart!`,
+                        showConfirmButton: false,
+                        timer: 3000
+                    })
+                }
             }
+            // for (key in cart) {
+            //     if (cart[key].stock > products[key].stock) {
+            //         cart[key].stock = products[key].stock;
+            //         modified.push(cart[key])
+            //     } else if (products[key].stock === 0) {
+            //         deleted.push(cart.key);
+            //     }
+            // }
 
 
             for (key in cart) {
@@ -235,7 +249,7 @@ async function checkOut() {
                                 title: 'Your order has been succesfully processed!',
                                 text: "You'll soon receive a confirmation e-mail with all the order details.",
                                 showConfirmButton: false,
-                                timer: 2000
+                                timer: 3000
                             })
                                 .then(() => {
                                     localStorage.clear();
@@ -264,7 +278,7 @@ async function checkOut() {
                         text: `Your order couldn't be processes due to stock update! Check the cart and try again.`,
                         type: 'info',
                         showConfirmButton: false,
-                        timer: 2000
+                        timer: 3000
                     })
                         .then(() => {
                             fetch(`https://online-shop-a4050.firebaseio.com/.json`)

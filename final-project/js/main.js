@@ -10,9 +10,9 @@ window.onload = () => {
     document.querySelector("#adminIcon").addEventListener("click", () => {
         window.location.assign("admin.html")
     });
-    document.querySelector("#cartIcon").addEventListener("click", () => {
-        document.querySelector("#cart-modal-div").classList.remove("toggle");
-    });
+    // document.querySelector("#cartIcon").addEventListener("click", () => {
+    //     document.querySelector("#cart-modal-div").classList.remove("toggle");
+    // });
 
     document.querySelector("#search-input").addEventListener("keyup", event => {
         var searchFor = event.target.value;
@@ -65,12 +65,13 @@ function counterUpdate() {
 
 function display() {
     var images = products[key].images.split(" ");
+    console.log(images);
     // document.querySelector("#items-display").innerHTML = '';
     document.querySelector("#items-display").innerHTML += `
                     <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 text-center ">
                         <div class = "display-item">
                             <div>
-                                <img class = "display-img card-img-top" onclick = "details(${key})" src="${images[0]}" alt="">
+                                <img class = "display-img card-img-top" onclick = "details(${key})" src="../images/${images[0]}" alt="">
                             </div>
                             <div id = 'h'><h6  class = "product-name" >${products[key].name}</h6></div>
                             <div ><p class = "product-price mx-auto">$${products[key].price}</p></div>
@@ -123,7 +124,7 @@ function addToCart(key) {
                 if (toCartProduct.stock > 0) {
 
                     cart[key] = {
-                        image: toCartProduct.image,
+                        images: toCartProduct.images,
                         name: toCartProduct.name,
                         price: toCartProduct.price,
                         stock: toCartProduct.stock - 1,
