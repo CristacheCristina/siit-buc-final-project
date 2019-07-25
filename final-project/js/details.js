@@ -166,7 +166,7 @@ function displayDetails(obj) {
 
 
     document.querySelector('#addToCart').onmouseover = () => {
-        if (detailedProduct.stock === "0") {
+        if (detailedProduct.stock === 0) {
             document.querySelector("#addToCart").style.transitionDuration = "2000"
             document.querySelector("#addToCart").innerHTML = '';
             document.querySelector("#addToCart").innerHTML = "Out of stock"
@@ -175,7 +175,7 @@ function displayDetails(obj) {
     }
 
     document.querySelector('#addToCart').onmouseout = () => {
-        if (detailedProduct.stock === "0") {
+        if (detailedProduct.stock === 0) {
             document.querySelector("#addToCart").innerHTML = '';
             document.querySelector("#addToCart").innerHTML = "Add to cart"
         }
