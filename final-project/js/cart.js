@@ -46,7 +46,7 @@ async function getUpdateAndDisplay() {
     
     if (Object.keys(cart).length > 0) {
         for (key in cart) {
-            if (cart[key].quantity > products[key].stock) {
+            if (cart[key].quantity > products[key].stock && products[key].stock !== 0) {
                 cart[key].quantity = products[key].stock;
                 cart[key].stock = products[key].stock - cart[key].quantity;
                 localStorage.setItem("cart", JSON.stringify(cart));
