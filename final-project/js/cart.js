@@ -43,15 +43,7 @@ async function getUpdateAndDisplay() {
         var data = await fetch(`https://online-shop-a4050.firebaseio.com/.json`);
         window.products = await data.json();
     } catch (error) { console.error() }
-    // if (Object.keys(cart).length > 0) {
-    //     loader();
-    //     displayCart();
-    //     counterUpdate();
-    // } else {
-    //     loader();
-    //     cartReset();
-    //     counterUpdate();
-    // }
+    
     if (Object.keys(cart).length > 0) {
         for (key in cart) {
             if (cart[key].quantity > products[key].stock) {
@@ -63,16 +55,13 @@ async function getUpdateAndDisplay() {
                     type: 'info',
                     title: 'Something went wrong!',
                     text: `We modified the ${cart[key].name} quantity in cart due to stock insuffiency!`,
-
                 })
                     .then(() => {
-
                         loader();
                         displayCart();
                         counterUpdate();
                     })
             } else if (products[key].stock === 0 || products[key] === undefined) {
-
                 Swal.fire({
                     position: 'top-end',
                     type: 'info',
