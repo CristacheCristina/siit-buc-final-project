@@ -186,8 +186,6 @@ function addToCart() {
                     type: 'error',
                     title: 'The required quantity exceeds our stock!',
 
-
-
                 })
             } else {
                 cart[id].quantity += desiredQuantity;
@@ -234,7 +232,7 @@ function addToCart() {
                     type: 'success',
                     title: 'Added to cart!',
                     showConfirmButton: false,
-                    timer: 3000
+                    timer: 2000
                 });
 
                 document.querySelector("#quantity").value = 0;

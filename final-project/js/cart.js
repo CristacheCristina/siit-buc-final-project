@@ -129,7 +129,7 @@ function displayCart() {
                 <td class = "price" id = "${key}">$${cart[key].price.toFixed(2)}</td>
                 <td>${cart[key].stock}</td>
                 <td class = "quantityTd"><div class="my-auto"><i data-id = "decrement${key}" class = "fas fa-arrow-circle-left decrement my-auto" onclick = "reduce(${key});"></i><input type = "text" value = ${cart[key].quantity} data-id = "input${key}" class = "mx-1 quantity" disabled ><i data-id = "increment${key}" class = "fas fa-arrow-circle-right increment  my-auto" onclick = "increase(${key})"></i></div></td>
-                <td >$<span id = "total${key}" class = "total">${cart[key].price * cart[key].quantity}</span></td>
+                <td class = "total">$<span id = "total${key}" >${cart[key].price * cart[key].quantity}</span></td>
             </tr>
             `;
         total += cart[key].price * cart[key].quantity;

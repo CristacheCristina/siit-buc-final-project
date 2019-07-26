@@ -140,8 +140,11 @@ async function addToCart(key) {
                 };
                 localStorage.setItem('cart', JSON.stringify(cart));
                 Swal.fire({
+                    position: 'top-end',
                     type: 'success',
-                    title: 'Added to cart',
+                    title: 'Added to cart!',
+                    showConfirmButton: false,
+                    timer: 2000
                 });
                 counterUpdate()
             } else {
