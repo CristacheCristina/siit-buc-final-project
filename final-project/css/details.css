@@ -12,11 +12,12 @@ html, body {
 ::-moz-selection {
     background: rgba(230, 152, 51, 0.808);
 }
-#admin, #cart{
+
+#admin, #cart {
     display: flex;
     justify-content: center;
     width: 3em;
-    height:3em;
+    height: 3em;
     text-align: center;
 }
 
@@ -25,25 +26,33 @@ html, body {
     right: 2em;
     margin-top: .5em;
 }
-.menu-btns button{
+
+.menu-btns button {
     background-color: transparent;
     height: 3em;
     width: 5em;
     border: none;
 }
-.cart{
+
+.cart {
     margin-left: 2em;
 }
 
-a{
+a {
     color: black;
 }
-a{
+
+a {
     color: black;
 }
-a:hover{
+
+a:hover {
     color: rgb(240, 216, 84);
     transition-duration: .5s;
+}
+
+#home, .menu-btns {
+    cursor: pointer;
 }
 
 #counter {
@@ -68,18 +77,22 @@ ul {
 li {
     float: left;
 }
-.nav-link{
+
+.nav-link {
     font-size: 1.5em;
 }
-.navigation{
+
+.navigation {
     position: sticky;
     background-color: rgba(12, 149, 7, 0.041)
 }
+
 .sticky {
     position: fixed;
     top: 0;
     width: 100%;
-  }
+}
+
 .mainSection {
     font-family: 'Open Sans', sans-serif!important;
 }
@@ -139,6 +152,7 @@ li {
     border: 1px solid rgba(240, 217, 84, 0.726);
     transition-duration: 500ms;
 }
+
 .fa-arrow-circle-left, .fa-arrow-circle-right {
     color: gray;
 }
@@ -148,8 +162,11 @@ li {
     transition-duration: .4s;
 }
 
+.fa-shopping-cart:hover, .fa-user-shield:hover, .fa-leaf:hover {
+    color: rgb(93, 93, 93);
+}
+
 #quantity {
-    
     border: none;
     width: 2em;
     text-align: center;
@@ -185,8 +202,6 @@ li {
 .fa-cart-arrow-down {
     margin-left: .3em;
 }
-
-
 
 #description>p {
     margin-left: 3em!important;

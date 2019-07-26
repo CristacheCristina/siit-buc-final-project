@@ -57,8 +57,8 @@ async function updateDB(event) {
         decription !== '' &&
         dose !== '' &&
         gmo !== '' &&
-        image !== '' &&
-        image2 !== '' &&
+        images !== '' &&
+        
         name !== '' &&
         price !== '' &&
         quantity !== '' &&
@@ -69,13 +69,12 @@ async function updateDB(event) {
             decription: description,
             dose: dose,
             GMO: gmo,
-            image:image,
-            image2: image2,
+            images:images,
             name: name,
             price:price,
             quantity: quantity,
             totalCbd: totalCbd,
-            stock: stock
+            stock: stock*1
         }
         let edit = await fetch(`https://online-shop-a4050.firebaseio.com/${key}.json`, {
             method: "PUT",

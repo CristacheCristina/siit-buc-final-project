@@ -64,7 +64,7 @@ img {
     width: 10em;
 }
 
-#addBtn:hover, #saveChanges:hover, .back-btns button:hover {
+#addBtn:hover, #saveChanges:hover, .back-btns button:hover, #adminAdd:hover, #backToShop:hover {
     background-color: rgba(223, 171, 0, 0.555);
     border: none;
 }

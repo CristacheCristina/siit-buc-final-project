@@ -40,7 +40,7 @@ document.querySelector('#addBtn').addEventListener("click", (event) => {
             price: price,
             quantity:quantity,
             totalCbd: totalCbd,
-            stock: stock
+            stock: stock*1
             
         }
 

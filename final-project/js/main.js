@@ -1,18 +1,17 @@
 
 window.onload = () => {
-    document.body.style.height = "100vh"
-    document.body.style.background = 'url("https://www.seedsmancbd.com/media/productfinder/loading.gif") no-repeat';
-    document.body.style.backgroundPosition = "50% 50%";
-
+    loader();
     document.querySelector("#cartIcon").addEventListener("click", () => {
         window.location.assign("cart.html")
     });
     document.querySelector("#adminIcon").addEventListener("click", () => {
         window.location.assign("admin.html")
     });
-    // document.querySelector("#cartIcon").addEventListener("click", () => {
-    //     document.querySelector("#cart-modal-div").classList.remove("toggle");
-    // });
+
+    document.querySelector("#home").addEventListener("click", () => {
+        window.location.assign("index.html")
+    });
+    document.querySelector("#scrollTop").addEventListener("click", topFunction);
 
     document.querySelector("#search-input").addEventListener("keyup", event => {
         var searchFor = event.target.value;
@@ -23,34 +22,44 @@ window.onload = () => {
         }
     });
 
-    fetch(`https://online-shop-a4050.firebaseio.com/.json`)
-        .then(response => {
-            if (!response.ok) {
-                throw Error(response.statusText);
-            } else if (response.ok && response.status === 200) {
-                return response.json();
-            }
-        })
-        .then(response => {
-            console.log(response)
-            window.products = response;
-            document.body.style.height = '';
-            document.body.style.background = '';
-            document.body.style.backgroundPosition = "";
+    getAndDisplay();
+}
+async function getAndDisplay() {
+    try {
+        var data = await fetch(`https://online-shop-a4050.firebaseio.com/.json`);
+        window.products = await data.json();
+        counterUpdate();
+        loader();
+        display();
+    } catch (error) { console.error(error) }
+}
+function loader() {
+    if (document.body.hasAttribute("load")) {
+        document.body.removeAttribute("load");
+        document.body.setAttribute("loaded", "true");
+        document.body.style.height = "100vh"
+        document.body.style.background = 'url("https://www.seedsmancbd.com/media/productfinder/loading.gif") no-repeat';
+        document.body.style.backgroundPosition = "50% 50%";
 
-            for (key in products) 
-                
-                display();
-            counterUpdate();
+    } else if (document.body.hasAttribute("loaded")) {
+        document.body.style.height = '';
+        document.body.style.background = '';
+        document.body.style.backgroundPosition = "";
+    }
+}
+window.onscroll = function () { scrollFunction() };
 
-            var cards = document.querySelectorAll(".display-item");
-            console.log(cards);
-            cards.forEach(element => {
-                element.addEventListener('onmouseover', (element) => { element.classList.add("isInFocus") });
-            })
+function scrollFunction() {
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        document.querySelector("#scrollTop").style.display = "block";
+    } else {
+        document.querySelector("#scrollTop").style.display = "none";
+    }
+}
 
-
-        })
+function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
 }
 function counterUpdate() {
     cart = JSON.parse(localStorage.getItem('cart'));
@@ -64,22 +73,23 @@ function counterUpdate() {
 }
 
 function display() {
-    var images = products[key].images.split(" ");
-    console.log(images);
-    // document.querySelector("#items-display").innerHTML = '';
-    document.querySelector("#items-display").innerHTML += `
+    var images;
+    for (key in products) {
+        console.log(products[key]);
+        images = products[key].images.split(" ");
+        document.querySelector("#items-display").innerHTML += `
                     <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 text-center ">
                         <div class = "display-item">
                             <div>
-                                <img class = "display-img card-img-top" onclick = "details(${key})" src="../images/${images[0]}" alt="">
+                                <img class = "display-img card-img-top" onclick = "details('${key}')" src="../images/${images[0]}" alt="">
                             </div>
                             <div id = 'h'><h6  class = "product-name" >${products[key].name}</h6></div>
                             <div ><p class = "product-price mx-auto">$${products[key].price}</p></div>
-                            <div class = "tocart text-center" ><button class="to-cart-btn" onclick = "addToCart(${key})" id = "addTocart" >Add to Cart<i id = "addedToCart" class="fas "></i></button></div>
+                            <div class = "tocart text-center" ><button class="to-cart-btn" onclick = "addToCart('${key}')" id = "addTocart" >Add to Cart<i id = "addedToCart" class="fas "></i></button></div>
                         </div>
                     </div>
                 `;
-
+    }
 }
 
 function details(key) {
@@ -94,87 +104,48 @@ function cartInit() {
     return cart;
 }
 
-function addToCart(key) {
+async function addToCart(key) {
     var cart = cartInit();
-    fetch(`https://online-shop-a4050.firebaseio.com/${key}.json`)
-        .then(response => {
-            return response.json();
-        })
-        .then(response => {
-            window.toCartProduct = response;
-        })
-        .then(() => {
-            if (cart[key]) {
-                if (cart[key].stock > 0) {
-                    cart[key].quantity += 1;
-                    cart[key].stock -= 1;
-                    cart[key].total += cart[key].price * 1
-                    localStorage.setItem('cart', JSON.stringify(cart));
-                    Swal.fire({
-                        type: 'success',
-                        title: 'Added to cart',
-                    });
-                    counterUpdate();
-                } else {
-                    Swal.fire('This item is out of stock!')
-                }
-
-                
+    try {
+        var data = await fetch(`https://online-shop-a4050.firebaseio.com/${key}.json`);
+        var toCartProduct = await data.json();
+        if (cart[key]) {
+            if (cart[key].stock > 0) {
+                cart[key].quantity += 1;
+                cart[key].stock -= 1;
+                cart[key].total += cart[key].price * 1
+                localStorage.setItem('cart', JSON.stringify(cart));
+                Swal.fire({
+                    type: 'success',
+                    title: 'Added to cart',
+                });
+                counterUpdate();
             } else {
-                if (toCartProduct.stock > 0) {
-
-                    cart[key] = {
-                        images: toCartProduct.images,
-                        name: toCartProduct.name,
-                        price: toCartProduct.price,
-                        stock: toCartProduct.stock - 1,
-                        quantity: 1,
-                        total: toCartProduct.price * 1
-                    };
-                    localStorage.setItem('cart', JSON.stringify(cart));
-                    Swal.fire({
-                        type: 'success',
-                        title: 'Added to cart',
-                        // text: 'Something went wrong!',
-                        // footer: '<a href>Why do I have this issue?</a>'
-                    });
-                    counterUpdate()
-                } else {
-                    Swal.fire('This item is out of stock!')
-                }
-
+                Swal.fire('This item is out of stock!')
             }
-        })
+        } else {
+            if (toCartProduct.stock > 0) {
+
+                cart[key] = {
+                    images: toCartProduct.images,
+                    name: toCartProduct.name,
+                    price: toCartProduct.price,
+                    stock: toCartProduct.stock - 1,
+                    quantity: 1,
+                    total: toCartProduct.price * 1
+                };
+                localStorage.setItem('cart', JSON.stringify(cart));
+                Swal.fire({
+                    type: 'success',
+                    title: 'Added to cart',
+                });
+                counterUpdate()
+            } else {
+                Swal.fire('This item is out of stock!')
+            }
+
+        }
+    } catch (error) { console.error(error) }
+
 }
-
-// function compare(a, b) {
-//     if ((a.price) * 1 < (b.price) * 1) {
-//         return -1;
-//     }
-//     if ((a.price) * 1 > (b.price) * 1) {
-//         return 1;
-//     }
-//     return 0;
-// }
-
-// function sortBy(event) {
-//     var toSort = [];
-//     for (var key in products) {
-//         toSort.push(products[key])
-//     }
-
-//     if (event.target.id === 1) {
-//         for (var i of toSort) {
-//             toSort.sort(function(toSort[i], toSort[i+1]){
-                
-//             })
-//         }
-//     } else if (event.target.id === 1) {
-//         toSort.sort(compare(toSort[i + 1], toSort[i]))
-//     }
-//     return toSort;
-// }
-
-
-
 

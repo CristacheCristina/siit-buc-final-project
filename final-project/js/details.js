@@ -3,10 +3,7 @@ var url = new URL(document.URL);
 var id = url.searchParams.get('id');
 var cart;
 window.onload = () => {
-    // popperCart();
-    document.body.style.height = "100vh"
-    document.body.style.background = 'url("https://www.seedsmancbd.com/media/productfinder/loading.gif") no-repeat';
-    document.body.style.backgroundPosition = "50% 50%";
+    loader()
     document.querySelector("#cart").addEventListener("click", () => {
         window.location.assign("cart.html")
     });
@@ -15,55 +12,40 @@ window.onload = () => {
         window.location.assign("admin.html")
     });
 
-    // fetch(`https://online-shop-a4050.firebaseio.com/${id}.json`)
-    //     .then(response => {
+    document.querySelector("#home").addEventListener("click", () => {
+        window.location.assign("index.html")
+    });
 
-    //         if (!response.ok)
-    //             throw Error(response.statusText);
-    //         return response.json();
-    //     })
-    //     .then(response => {
-    //         window.detailedProduct = response;
-    //         window.detailedProductId = detailedProduct.ID;
-    //         document.body.style.height = '';
-    //         document.body.style.background = '';
-    //         document.body.style.backgroundPosition = "";
-    //         displayDetails(detailedProduct);
-    //         $('.carousel').carousel();
-    //         counterUpdate();
-
-    //     });
-    
-
-
-
+    getAndDisplay();
 }
-// function popperCart() {
-//     var el = JSON.parse(localStorage.getItem('cart'));
-//     console.log(el);
-//     window.popperInner = `<table>`;
-//     if (Object.keys(el).length > 0) {
-//         for (key in el) {
-//             console.log(key);
-            
-//             window.popperCart += `
-//                 <tr>
-//                     <td><img src="${el[key].image}"><td>
-//                     <td>$${el[key].price}</td>
-//                 </tr>
-//                 <tr>
-//                     <button data-id = "decrement${key}" class = "decrement add-value my-auto" onclick = "reduce(${key});">-</button><input type = "text" value = ${el[key].quantity} data-id = "input${key}" class = "quantity"><button data-id = "increment${key}" class = "increment add-value my-auto" onclick = "increase(${key})">+</button>
-//                 </tr>
-//         `
-//         console.log(popperInner);
-//         }
-//         popperInner += `</table>`;
-//     } else {
-//         popperInner = '';
-//         popperInner = '<h3>There are no items in cart!</h3>'
-//     }
 
-// }
+async function getAndDisplay() {
+    try {
+        let data = await fetch(`https://online-shop-a4050.firebaseio.com/${id}.json`);
+        window.detailedProduct = await data.json();
+        loader();
+        displayDetails(detailedProduct);
+        $('.carousel').carousel();
+        counterUpdate();
+    } catch (error) { console.error(error) }
+}
+function loader() {
+    if (document.body.hasAttribute("load")) {
+        document.body.removeAttribute("load");
+        document.body.setAttribute("loaded", "true");
+        document.body.style.height = "100vh"
+        document.body.style.background = 'url("https://www.seedsmancbd.com/media/productfinder/loading.gif") no-repeat';
+        document.body.style.backgroundPosition = "50% 50%";
+
+    } else {
+        document.body.removeAttribute("loaded");
+        document.body.setAttribute("load", "true");
+        document.body.style.height = '';
+        document.body.style.background = '';
+        document.body.style.backgroundPosition = "";
+    }
+}
+
 function counterUpdate() {
     let cart = JSON.parse(localStorage.getItem('cart'));
     let counter = 0;
@@ -166,7 +148,7 @@ function displayDetails(obj) {
     document.querySelector("#decrement").addEventListener("click", () => {
         if (parseInt(document.getElementById('quantity').value, 10) > 1)
             document.getElementById('quantity').value -= 1;
-            window.desiredQuantity = parseInt(document.querySelector("#quantity").value);
+        window.desiredQuantity = parseInt(document.querySelector("#quantity").value);
 
     });
 

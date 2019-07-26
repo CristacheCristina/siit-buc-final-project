@@ -1,7 +1,5 @@
 window.onload = () => {
-    document.body.style.height = "100vh"
-    document.body.style.background = 'url("https://www.seedsmancbd.com/media/productfinder/loading.gif") no-repeat';
-    document.body.style.backgroundPosition = "50% 50%";
+    loader();
     window.cart = JSON.parse(localStorage.getItem('cart'));
 
 
@@ -13,40 +11,91 @@ window.onload = () => {
         window.location.assign("admin.html")
     });
 
+    document.querySelector("#home").addEventListener("click", () => {
+        window.location.assign("index.html")
+    });
+
+
     getUpdateAndDisplay();
 
 }
-async function getUpdateAndDisplay() {
-    try {
-        var getDb = await fetch(`https://online-shop-a4050.firebaseio.com/.json`);
-        window.products = await getDb.json();
-        for (key in cart) {
-            if (!products[key]) {
-                Swal.fire({
-                    title: 'Something went wrong!',
-                    text: `${cart[key].name} is no longer available and we deleted it from your cart!`,
-                    type: 'info',
-                    showConfirmButton: false,
-                    timer: 3000
-                })
-                    .then(() => {
-                        delete cart[key];
-                    })
-            }
-        }
-        document.body.style.height = ""
+function loader() {
+    if (document.body.hasAttribute("load")) {
+        document.body.removeAttribute("load");
+        document.body.setAttribute("loaded", "true");
+        document.body.style.height = "100vh"
+        document.body.style.background = 'url("https://www.seedsmancbd.com/media/productfinder/loading.gif") no-repeat';
+        document.body.style.backgroundPosition = "50% 50%";
+
+    } else if (document.body.hasAttribute("loaded")) {
+        document.body.removeAttribute("loaded");
+        document.body.setAttribute("load", "true");
+        document.body.style.height = '';
         document.body.style.background = '';
         document.body.style.backgroundPosition = '';
-        if (Object.keys(cart).length > 0) {
-            displayCart();
-            counterUpdate();
-        } else {
-            console.log(cart);
-            cartReset();
-            counterUpdate();
-        }
-    } catch (error) {
-        console.error(error)
+    }
+}
+async function getUpdateAndDisplay() {
+    try {
+        var data = await fetch(`https://online-shop-a4050.firebaseio.com/.json`);
+        window.products = await data.json();
+    } catch (error) { console.error() }
+    // if (Object.keys(cart) > 0) {
+    //     for (key in cart) {
+    //         if (cart[key].quantity > products[key].stock) {
+    //             Swal.fire({
+    //                 position: 'top-end',
+    //                 type: 'info',
+    //                 title: 'Something went wrong!',
+    //                 text: `We had to modify ${cart[key].name} quantity due to stock insuffiency!`,
+    //             })
+    //                 .then(() => {
+    //                     cart[key].quantity = products[key].stock;
+    //                     localStorage.setItem('cart', JSON.stringify(cart));
+    //                     loader();
+    //                     displayCart();
+    //                     counterUpdate();
+    //                 })
+
+    //         } else if (products[key].stock === 0 || products[key] == undefined) {
+    //             Swal.fire({
+    //                 position: 'top-end',
+    //                 type: 'info',
+    //                 title: 'Something went wrong!',
+    //                 text: ` ${cart[key].name} is no longer available and we deleted it from your cart!`,
+    //             })
+    //                 .then(() => {
+    //                     delete cart[key];
+    //                     localStorage.setItem('cart', JSON.stringify(cart));
+    //                     if (Object.keys(cart) < 0) {
+    //                         loader();
+    //                         displayCart();
+    //                         counterUpdate();
+    //                     } else {
+    //                         loader();
+    //                         cartReset();
+    //                         counterUpdate();
+    //                     }
+    //                 })
+    //         } else {
+    //             loader();
+    //             displayCart();
+    //             counterUpdate();
+    //         }
+    //     }
+    // } else {
+    //     loader();
+    //     cartReset();
+    //     counterUpdate();
+    // }
+    if (Object.keys(cart).length > 0) {
+        loader();
+        displayCart();
+        counterUpdate();
+    } else {
+        loader();
+        cartReset();
+        counterUpdate();
     }
 
 }
@@ -61,12 +110,12 @@ function counterUpdate() {
 }
 
 function displayCart() {
-
+    console.log("start");
     document.querySelector("thead").innerHTML = '';
     document.querySelector('tbody').innerHTML = '';
     document.querySelector("#checkout").innerHTML = '';
-    if (cart !== null && Object.keys(cart).length > 0) {
-        document.querySelector("thead").innerHTML = `
+
+    document.querySelector("thead").innerHTML = `
             <tr>
                 <th></th>
                 <th class="image" ></th>
@@ -77,25 +126,26 @@ function displayCart() {
                 <th>Total</th>
             </tr>
         `;
-        var total = 0;
-        window.totalItems = 0;
-        for (key in cart) {
-            var images = cart[key].images.split(" ");
-            document.querySelector('tbody').innerHTML += `
+    window.totalItems = 0;
+    var total = 0;
+    for (key in cart) {
+        console.log("start");
+        var images = cart[key].images.split(" ");
+        document.querySelector('tbody').innerHTML += `
             <tr>
                 <td class= "x"><div id = "x-icon" onclick = "remove(${key})"><i class="fas fa-times" id = "icon${key}"></i></div></td>
                 <td class = "image "><a href = "details.html?id=${key}"><img style = "height:100px;width:auto;" src = "../images/${images[0]}"></a></td>
                 <td class = "name"><a href = "details.html?id=${key}">${cart[key].name}</a></td>
                 <td class = "price" id = "${key}">$${cart[key].price}</td>
-                <td>${cart[key].stock}</td>
+                <td>${products[key].stock - cart[key].quantity}</td>
                 <td class = "quantityTd"><div class="my-auto"><i data-id = "decrement${key}" class = "fas fa-arrow-circle-left decrement my-auto" onclick = "reduce(${key});"></i><input type = "text" value = ${cart[key].quantity} data-id = "input${key}" class = "mx-1 quantity" disabled ><i data-id = "increment${key}" class = "fas fa-arrow-circle-right increment  my-auto" onclick = "increase(${key})"></i></div></td>
                 <td >$<span id = "total${key}" class = "total">${cart[key].price * cart[key].quantity}</span></td>
             </tr>
             `;
-            total += cart[key].price * cart[key].quantity;
-            window.totalItems += cart[key].quantity;
+        total += cart[key].price * cart[key].quantity;
+        window.totalItems += cart[key].quantity;
 
-            document.querySelector("#checkout").innerHTML = `
+        document.querySelector("#checkout").innerHTML = `
                      <tbody>
                         <tr>
                             <th>Subtotal</th>
@@ -113,9 +163,9 @@ function displayCart() {
                     </tbody>
             `
 
-            document.querySelector("#checkingoutBtn").innerHTML = `<button onclick = "checkOut()" id="checkoutBtn">CHECKOUT</button>`;
-        }
+        document.querySelector("#checkingoutBtn").innerHTML = `<button onclick = "checkOut()" id="checkoutBtn">CHECKOUT</button>`;
     }
+
 }
 
 function cartReset() {
