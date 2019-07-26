@@ -62,7 +62,7 @@ function topFunction() {
     document.documentElement.scrollTop = 0;
 }
 function counterUpdate() {
-    cart = JSON.parse(localStorage.getItem('cart'));
+    var cart = cartInit();
     var counter = 0;
     if (Object.keys(cart).length > 0) {
         for (key in cart) {
@@ -116,8 +116,11 @@ async function addToCart(key) {
                 cart[key].total += cart[key].price * 1
                 localStorage.setItem('cart', JSON.stringify(cart));
                 Swal.fire({
+                    position: 'top-end',
                     type: 'success',
-                    title: 'Added to cart',
+                    title: 'Added to cart!',
+                    showConfirmButton: false,
+                    timer: 3000
                 });
                 counterUpdate();
             } else {

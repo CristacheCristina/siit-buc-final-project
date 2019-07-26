@@ -1,7 +1,5 @@
 window.onload = () => {
     loader();
-    window.cart = JSON.parse(localStorage.getItem('cart'));
-
 
     document.querySelector("#cartIcon").addEventListener("click", () => {
         window.location.assign("cart.html")
@@ -15,9 +13,16 @@ window.onload = () => {
         window.location.assign("index.html")
     });
 
-
+    cartInit();
     getUpdateAndDisplay();
 
+}
+function cartInit() {
+    if (localStorage.length > 0)
+        cart = JSON.parse(localStorage.getItem('cart'));
+    else
+        cart = {};
+    return cart;
 }
 function loader() {
     if (document.body.hasAttribute("load")) {
@@ -28,8 +33,6 @@ function loader() {
         document.body.style.backgroundPosition = "50% 50%";
 
     } else if (document.body.hasAttribute("loaded")) {
-        document.body.removeAttribute("loaded");
-        document.body.setAttribute("load", "true");
         document.body.style.height = '';
         document.body.style.background = '';
         document.body.style.backgroundPosition = '';
@@ -40,55 +43,50 @@ async function getUpdateAndDisplay() {
         var data = await fetch(`https://online-shop-a4050.firebaseio.com/.json`);
         window.products = await data.json();
     } catch (error) { console.error() }
-    // if (Object.keys(cart) > 0) {
-    //     for (key in cart) {
-    //         if (cart[key].quantity > products[key].stock) {
-    //             Swal.fire({
-    //                 position: 'top-end',
-    //                 type: 'info',
-    //                 title: 'Something went wrong!',
-    //                 text: `We had to modify ${cart[key].name} quantity due to stock insuffiency!`,
-    //             })
-    //                 .then(() => {
-    //                     cart[key].quantity = products[key].stock;
-    //                     localStorage.setItem('cart', JSON.stringify(cart));
-    //                     loader();
-    //                     displayCart();
-    //                     counterUpdate();
-    //                 })
-
-    //         } else if (products[key].stock === 0 || products[key] == undefined) {
-    //             Swal.fire({
-    //                 position: 'top-end',
-    //                 type: 'info',
-    //                 title: 'Something went wrong!',
-    //                 text: ` ${cart[key].name} is no longer available and we deleted it from your cart!`,
-    //             })
-    //                 .then(() => {
-    //                     delete cart[key];
-    //                     localStorage.setItem('cart', JSON.stringify(cart));
-    //                     if (Object.keys(cart) < 0) {
-    //                         loader();
-    //                         displayCart();
-    //                         counterUpdate();
-    //                     } else {
-    //                         loader();
-    //                         cartReset();
-    //                         counterUpdate();
-    //                     }
-    //                 })
-    //         } else {
-    //             loader();
-    //             displayCart();
-    //             counterUpdate();
-    //         }
-    //     }
+    // if (Object.keys(cart).length > 0) {
+    //     loader();
+    //     displayCart();
+    //     counterUpdate();
     // } else {
     //     loader();
     //     cartReset();
     //     counterUpdate();
     // }
     if (Object.keys(cart).length > 0) {
+        for (key in cart) {
+            if (cart[key].quantity > products[key].stock) {
+                cart[key].quantity = products[key].stock;
+                cart[key].stock = products[key].stock - cart[key].quantity;
+                localStorage.setItem("cart", JSON.stringify(cart));
+                Swal.fire({
+                    position: 'top-end',
+                    type: 'info',
+                    title: 'Something went wrong!',
+                    text: `We modified the ${cart[key].name} quantity in cart due to stock insuffiency!`,
+
+                })
+                    .then(() => {
+
+                        loader();
+                        displayCart();
+                        counterUpdate();
+                    })
+            } else if (products[key].stock === 0 || products[key] === undefined) {
+                Swal.fire({
+                    position: 'top-end',
+                    type: 'info',
+                    title: 'Something went wrong!',
+                    text: `${cart[key].name} is no longer available and we deleted it from your cart!`,
+                })
+                    .then(() => {
+                        delete cart[key];
+                        localStorage.setItem("cart", JSON.stringify(cart));
+                        loader();
+                        displayCart();
+                        counterUpdate();
+                    })
+            }
+        }
         loader();
         displayCart();
         counterUpdate();
@@ -101,16 +99,17 @@ async function getUpdateAndDisplay() {
 }
 
 function counterUpdate() {
+    var cart = cartInit();
     if (Object.keys(cart).length > 0) {
         document.querySelector("#counter").innerHTML = totalItems;
     }
-    else if (Object.keys(cart).length === 0) {
+    else {
         document.querySelector("#counter").innerHTML = 0;
     }
 }
 
 function displayCart() {
-    console.log("start");
+    var cart = cartInit();
     document.querySelector("thead").innerHTML = '';
     document.querySelector('tbody').innerHTML = '';
     document.querySelector("#checkout").innerHTML = '';
@@ -137,7 +136,7 @@ function displayCart() {
                 <td class = "image "><a href = "details.html?id=${key}"><img style = "height:100px;width:auto;" src = "../images/${images[0]}"></a></td>
                 <td class = "name"><a href = "details.html?id=${key}">${cart[key].name}</a></td>
                 <td class = "price" id = "${key}">$${cart[key].price}</td>
-                <td>${products[key].stock - cart[key].quantity}</td>
+                <td>${cart[key].stock}</td>
                 <td class = "quantityTd"><div class="my-auto"><i data-id = "decrement${key}" class = "fas fa-arrow-circle-left decrement my-auto" onclick = "reduce(${key});"></i><input type = "text" value = ${cart[key].quantity} data-id = "input${key}" class = "mx-1 quantity" disabled ><i data-id = "increment${key}" class = "fas fa-arrow-circle-right increment  my-auto" onclick = "increase(${key})"></i></div></td>
                 <td >$<span id = "total${key}" class = "total">${cart[key].price * cart[key].quantity}</span></td>
             </tr>
@@ -171,15 +170,16 @@ function displayCart() {
 function cartReset() {
     document.querySelector("#title").style.display = "none";
     document.querySelector('#tbody').innerHTML = '<div class="  ml-2"><h1 id="empty-cart">No items in your cart!</h1><hr></div>';
-    document.querySelector("thead").innerHTML =
-        document.querySelector("#checkout").innerHTML = '';
+    document.querySelector("thead").innerHTML = '';
+    document.querySelector("#checkout").innerHTML = '';
     document.querySelector("#checkingoutBtn").innerHTML = '';
 }
 
 function increase(key) {
+    var cart = cartInit();
     var desiredQuantity = document.querySelector(`[data-id = input${key}]`).value * 1;
     viewportWidth = window.innerWidth || document.documentElement.clientWidth;
-    if (products[key].stock >= desiredQuantity) {
+    if (products[key].stock > desiredQuantity) {
         desiredQuantity++;
         document.querySelector(`[data-id = input${key}]`).value = desiredQuantity;
         cart[key].quantity += 1;
@@ -192,6 +192,7 @@ function increase(key) {
 }
 
 function reduce(key) {
+    var cart = cartInit();
     var desiredQuantity = Number(document.querySelector(`[data-id = input${key}]`).value)
     if (desiredQuantity > 0) {
         if (desiredQuantity === 1) {
@@ -217,6 +218,7 @@ function reduce(key) {
 }
 
 function remove(key) {
+    var cart = cartInit();
     delete cart[key];
     localStorage.setItem('cart', JSON.stringify(cart));
     window.cart = JSON.parse(localStorage.getItem('cart'));
@@ -231,6 +233,7 @@ function remove(key) {
 }
 
 function checkOut() {
+    var cart = cartInit();
     var promises = [];
     fetch(`https://online-shop-a4050.firebaseio.com/.json`)
         .then(response => {
@@ -250,7 +253,7 @@ function checkOut() {
                     sufficientStock = false;
                     break;
                 }
-                if (!products[key]) {
+                if (products[key] === undefined) {
                     Swal.fire({
                         position: 'top-end',
                         type: 'info',
@@ -259,17 +262,12 @@ function checkOut() {
                         showConfirmButton: false,
                         timer: 3000
                     })
+                    then(() => {
+                        delete cart[key];
+                       localStorage.setItem("cart", JSON.stringify(cart))
+                    })
                 }
             }
-            // for (key in cart) {
-            //     if (cart[key].stock > products[key].stock) {
-            //         cart[key].stock = products[key].stock;
-            //         modified.push(cart[key])
-            //     } else if (products[key].stock === 0) {
-            //         deleted.push(cart.key);
-            //     }
-            // }
-
 
             for (key in cart) {
                 if (sufficientStock) {
@@ -291,6 +289,7 @@ function checkOut() {
                                 .then(() => {
                                     localStorage.clear();
                                     cartReset();
+                                    counterUpdate();
                                 })
                                 .then(() => {
                                     fetch(`https://online-shop-orders.firebaseio.com/.json`, {
