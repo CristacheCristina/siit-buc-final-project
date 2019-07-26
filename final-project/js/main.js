@@ -76,6 +76,7 @@ function display() {
     var images;
     for (key in products) {
         console.log(products[key]);
+        
         images = products[key].images.split(" ");
         document.querySelector("#items-display").innerHTML += `
                     <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 text-center ">
@@ -97,7 +98,7 @@ function details(key) {
 }
 
 function cartInit() {
-    if (localStorage.length > 0)
+    if (localStorage.getItem("cart"))
         cart = JSON.parse(localStorage.getItem('cart'));
     else
         cart = {};

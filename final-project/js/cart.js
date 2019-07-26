@@ -168,7 +168,7 @@ function cartReset() {
 
 function increase(key) {
     var cart = cartInit();
-    var desiredQuantity = document.querySelector(`[data-id = input${'key'}]`).value * 1;
+    var desiredQuantity = document.querySelector(`[data-id = input${key}]`).value * 1;
     viewportWidth = window.innerWidth || document.documentElement.clientWidth;
     if (products[key].stock > desiredQuantity) {
         desiredQuantity++;
