@@ -232,6 +232,10 @@ hr {
     .shipping {
         font-size: 13px;
     }
+    #counter{
+        left: 4.7em;
+        bottom: 2em;
+    }
    
 }
 
