@@ -67,6 +67,9 @@ img {
 #addBtn:hover, #saveChanges:hover, .back-btns button:hover, #adminAdd:hover, #backToShop:hover {
     background-color: rgba(223, 171, 0, 0.555);
     border: none;
+    -webkit-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
 }
 
 label {
@@ -122,22 +125,24 @@ button:focus {
     .util-btns {
         margin-left: 69%;
     }
-    .back-btns{
+    .back-btns {
         margin-left: 50%;
     }
 }
-@media (max-width: 505px) and (max-width: 541px){
+
+@media (max-width: 505px) and (max-width: 541px) {
     .util-btns {
         margin-left: 50%!important;
     }
 }
+
 @media (max-width: 768px) {
     .util-btns {
         margin-left: 36.3%;
     }
     .title {
-       margin-left: 0;
+        margin-left: 0;
     }
 }
 
-@media (max-width: 1200px) { }
+@media (max-width: 1200px) {}

@@ -42,7 +42,7 @@ async function getUpdateAndDisplay() {
     try {
         var data = await fetch(`https://online-shop-a4050.firebaseio.com/.json`);
         window.products = await data.json();
-    } catch (error) { console.error() }
+    } catch (error) { console.error(error) }
     
     if (Object.keys(cart).length > 0) {
         for (key in cart) {
@@ -119,7 +119,6 @@ function displayCart() {
     window.totalItems = 0;
     var total = 0;
     for (key in cart) {
-        console.log("start");
         var images = cart[key].images.split(" ");
         document.querySelector('tbody').innerHTML += `
             <tr>
