@@ -13,28 +13,29 @@ window.onload = () => {
     document.querySelector('#backToShop').addEventListener('click', () => {
         location.assign("index.html")
     });
-    try {
-        var data = await fetch(`https://online-shop-a4050.firebaseio.com/${key}.json`)
-        var response = await data.json();
-    } catch (error) {
-        console.error(error);
+    fetch(`https://online-shop-a4050.firebaseio.com/${key}.json`)
+        .then(response => {
+            return response.json()
+        })
+        .then(response => {
+            document.querySelector("#form").style.display = "block";
+            document.body.style.height = ""
+            document.body.style.background = '';
+            document.body.style.backgroundPosition = "";
+            document.querySelector('#category').value = response.category;
+            document.querySelector("#description").value = response.description;
+            document.querySelector("#dose").value = response.dose;
+            document.querySelector("#gmo").value = response.GMO;
+            document.querySelector("#images").value = response.images;
+            document.querySelector("#name").value = response.name;
+            document.querySelector("#price").value = response.price;
+            document.querySelector("#quantity").value = response.quantity;
+            document.querySelector("#totalCbd").value = response.totalCbd;
+            document.querySelector("#stock").value = response.stock;
+            document.querySelector("#saveChanges").addEventListener("click", updateDB)
+        })
 
-    }
-    document.querySelector("#form").style.display = "block";
-    document.body.style.height = ""
-    document.body.style.background = '';
-    document.body.style.backgroundPosition = "";
-    document.querySelector('#category').value = response.category;
-    document.querySelector("#description").value = response.description;
-    document.querySelector("#dose").value = response.dose;
-    document.querySelector("#gmo").value = response.GMO;
-    document.querySelector("#images").value = response.images;
-    document.querySelector("#name").value = response.name;
-    document.querySelector("#price").value = response.price;
-    document.querySelector("#quantity").value = response.quantity;
-    document.querySelector("#totalCbd").value = response.totalCbd;
-    document.querySelector("#stock").value = response.stock;
-    document.querySelector("#saveChanges").addEventListener("click", updateDB)
+
 }
 
 async function updateDB(event) {
@@ -55,7 +56,6 @@ async function updateDB(event) {
         dose !== '' &&
         gmo !== '' &&
         images !== '' &&
-
         name !== '' &&
         price !== '' &&
         quantity !== '' &&
@@ -90,7 +90,7 @@ async function updateDB(event) {
             timer: 2000
         })
             .then(() => location.assign("admin.html"))
- 
+
             .catch(err => console.error(err))
     } else {
         Swal.fire({
