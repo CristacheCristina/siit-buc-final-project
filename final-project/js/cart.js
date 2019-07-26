@@ -71,27 +71,27 @@ async function getUpdateAndDisplay() {
                         displayCart();
                         counterUpdate();
                     })
+            } else if (products[key].stock === 0 || products[key] === undefined) {
+
+                Swal.fire({
+                    position: 'top-end',
+                    type: 'info',
+                    title: 'Something went wrong!',
+                    text: `${cart[key].name} is no longer available and we deleted it from your cart!`,
+                })
+                    .then(() => {
+                        delete cart[key];
+                        localStorage.setItem("cart", JSON.stringify(cart));
+                        loader();
+                        displayCart();
+                        counterUpdate();
+                    })
+
             }
         }
         loader();
         displayCart();
         counterUpdate();
-    } else if (products[key].stock === 0 || products[key] === undefined) {
-        for (key in cart) {
-            Swal.fire({
-                position: 'top-end',
-                type: 'info',
-                title: 'Something went wrong!',
-                text: `${cart[key].name} is no longer available and we deleted it from your cart!`,
-            })
-            .then(() => {
-                delete cart[key];
-                localStorage.setItem("cart", JSON.stringify(cart));
-                loader();
-                displayCart();
-                counterUpdate();
-            })
-        }
     } else {
         loader();
         cartReset();
