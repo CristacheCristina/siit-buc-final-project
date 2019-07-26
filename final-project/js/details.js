@@ -95,7 +95,7 @@ function displayDetails(obj) {
     
      <div class="col-11 col-sm-11 col-md-6 col-lg-6 col-xl-6 details-box text-details mx-auto">
          <h2 id = "product-name" class="ml-2">${obj.name}</h2>
-         <div class= "price ml-2" ><p >$${obj.price}</p></div>
+         <div class= "price ml-2" ><p >$${obj.price.toFixed(2)}</p></div>
          <div class="my-4" id = "description">${newDetails}</div>
          <div id = "stock" class="ml-2"><span style="font-weight:600">Stock:</span> ${obj.stock}</div>
          <div id="addBtnsGroup" class="my-3 ml-2"><i class = "fas fa-arrow-circle-left fa-lg" id = "decrement"></i><input type = "text" value = 1  id = "quantity"><i class = "fas fa-arrow-circle-right fa-lg" id = "increment"></i><button id = "addToCart">Add to cart</button></div>

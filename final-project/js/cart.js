@@ -126,7 +126,7 @@ function displayCart() {
                 <td class= "x"><div id = "x-icon" onclick = "remove(${key})"><i class="fas fa-times" id = "icon${key}"></i></div></td>
                 <td class = "image "><a href = "details.html?id=${key}"><img style = "height:100px;width:auto;" src = "../images/${images[0]}"></a></td>
                 <td class = "name"><a href = "details.html?id=${key}">${cart[key].name}</a></td>
-                <td class = "price" id = "${key}">$${cart[key].price}</td>
+                <td class = "price" id = "${key}">$${cart[key].price.toFixed(2)}</td>
                 <td>${cart[key].stock}</td>
                 <td class = "quantityTd"><div class="my-auto"><i data-id = "decrement${key}" class = "fas fa-arrow-circle-left decrement my-auto" onclick = "reduce(${key});"></i><input type = "text" value = ${cart[key].quantity} data-id = "input${key}" class = "mx-1 quantity" disabled ><i data-id = "increment${key}" class = "fas fa-arrow-circle-right increment  my-auto" onclick = "increase(${key})"></i></div></td>
                 <td >$<span id = "total${key}" class = "total">${cart[key].price * cart[key].quantity}</span></td>

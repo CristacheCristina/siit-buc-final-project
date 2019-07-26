@@ -84,7 +84,7 @@ function display() {
                                 <img class = "display-img card-img-top" onclick = "details('${key}')" src="../images/${images[0]}" alt="">
                             </div>
                             <div id = 'h'><h6  class = "product-name" >${products[key].name}</h6></div>
-                            <div ><p class = "product-price mx-auto">$${products[key].price}</p></div>
+                            <div ><p class = "product-price mx-auto">$${products[key].price.toFixed(2)}</p></div>
                             <div class = "tocart text-center" ><button class="to-cart-btn" onclick = "addToCart('${key}')" id = "addTocart" >Add to Cart<i id = "addedToCart" class="fas "></i></button></div>
                         </div>
                     </div>
