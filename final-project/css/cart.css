@@ -192,17 +192,8 @@ hr {
     #admin {
         width: 2em;
     }
-    /* #counter {
-        left: 5em;
-        margin-bottom: -.5em;
-        
-    } */
 
-    #checkout-table {
-        width: 40vw;
-    }
-
-    #checkoutBtn {
+    #checkout-table, #checkoutBtn {
         width: 40vw;
     }
     
@@ -240,9 +231,9 @@ hr {
         bottom: 2em;
     }
     #home{
-        margin-left: -2em;
+        margin-left: -2em!important;
     }
-    
+
     
    
 }
