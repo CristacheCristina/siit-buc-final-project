@@ -20,7 +20,9 @@ html, body {
     height: 3em;
     text-align: center;
 }
-
+.fa-arrow-circle-right, .fa-arrow-circle-left{
+    cursor: pointer;
+}
 .menu-btns {
     position: absolute;
     right: 2em;

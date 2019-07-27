@@ -67,10 +67,7 @@ button:focus, input:focus {
     width: 4em;
 }
 
-.add-value {
-    border: none;
-    margin-left: 0%;
-}
+
 
 hr {
     background-color: rgba(230, 152, 51, 0.808);
@@ -97,8 +94,8 @@ hr {
 
 .fa-arrow-circle-left, .fa-arrow-circle-right {
     color: gray;
+    cursor: pointer;
 }
-
 .fa-arrow-circle-left:hover, .fa-arrow-circle-right:hover {
     color: rgba(230, 152, 51, 0.808);
     transition-duration: .4s;

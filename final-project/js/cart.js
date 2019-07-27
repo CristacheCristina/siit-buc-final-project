@@ -38,32 +38,59 @@ function loader() {
         document.body.style.backgroundPosition = '';
     }
 }
-async function getUpdateAndDisplay() {
+async function getProducts() {
+    var products;
     try {
         var data = await fetch(`https://online-shop-a4050.firebaseio.com/.json`);
-        window.products = await data.json();
+        products = await data.json();
     } catch (error) { console.error(error) }
-    
+}
+function getUpdateAndDisplay() {
+    var products = getProducts();
     if (Object.keys(cart).length > 0) {
         for (key in cart) {
-            if (cart[key].quantity > products[key].stock && products[key].stock !== 0) {
-                cart[key].quantity = products[key].stock;
-                cart[key].stock = products[key].stock - cart[key].quantity;
-                localStorage.setItem("cart", JSON.stringify(cart));
-                Swal.fire({
-                    position: 'top-end',
-                    type: 'info',
-                    title: 'Something went wrong!',
-                    text: `We modified the ${cart[key].name} quantity in cart due to stock insuffiency!`,
-                })
-                    .then(() => {
-                        loader();
-                        displayCart();
-                        counterUpdate();
+            if (products[key] !== undefined) {
+                if (cart[key].quantity > products[key].stock && products[key].stock !== 0) {
+                    cart[key].quantity = products[key].stock;
+                    cart[key].stock = products[key].stock - cart[key].quantity;
+                    localStorage.setItem("cart", JSON.stringify(cart));
+                    Swal.fire({
+                        position: 'center',
+                        type: 'info',
+                        title: 'Something went wrong!',
+                        text: `We modified the ${cart[key].name} quantity in cart due to stock insuffiency!`,
                     })
-            } else if (products[key].stock === 0 || products[key] === undefined) {
+                        .then(() => {
+                            loader();
+                            displayCart();
+                            counterUpdate();
+                        })
+                } else if (products[key].stock === 0) {
+                    Swal.fire({
+                        position: 'center',
+                        type: 'info',
+                        title: 'Something went wrong!',
+                        text: `${cart[key].name} is no longer available and we deleted it from your cart!`,
+                    })
+                        .then(() => {
+                            delete cart[key];
+                            localStorage.setItem("cart", JSON.stringify(cart));
+                            if (Object.keys(cart).length > 0) {
+                                loader();
+                                displayCart();
+                                counterUpdate();
+                            } else {
+                                loader();
+                                cartReset();
+                                counterUpdate();
+                            }
+                        })
+
+                }
+            }
+            else {
                 Swal.fire({
-                    position: 'top-end',
+                    position: 'center',
                     type: 'info',
                     title: 'Something went wrong!',
                     text: `${cart[key].name} is no longer available and we deleted it from your cart!`,
@@ -75,7 +102,6 @@ async function getUpdateAndDisplay() {
                         displayCart();
                         counterUpdate();
                     })
-
             }
         }
         loader();
@@ -209,126 +235,120 @@ function reduce(key) {
 
 function remove(key) {
     var cart = cartInit();
-    delete cart[key];
-    localStorage.setItem('cart', JSON.stringify(cart));
-    window.cart = JSON.parse(localStorage.getItem('cart'));
-    if (Object.keys(cart).length > 0) {
-        displayCart();
-        counterUpdate();
-    } else {
-        cartReset();
-        counterUpdate();
-        document.querySelector("#title").style.display = "none";
-    }
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+    })
+        .then(() => {
+            delete cart[key];
+            localStorage.setItem('cart', JSON.stringify(cart));
+            window.cart = JSON.parse(localStorage.getItem('cart'));
+            if (Object.keys(cart).length > 0) {
+                displayCart();
+                counterUpdate();
+            } else {
+                cartReset();
+                counterUpdate();
+                document.querySelector("#title").style.display = "none";
+            }
+        })
 }
 
 function checkOut() {
+    var products = getProducts();
     var cart = cartInit();
     var promises = [];
-    fetch(`https://online-shop-a4050.firebaseio.com/.json`)
-        .then(response => {
-            if (!response.ok)
-                throw Error(response.statusText);
-            return response.json();
-        })
-        .then(response => {
-            // var modified = [];
-            // var deleted = [];
-            window.products = response;
-            var sufficientStock;
-            for (key in cart) {
-                if (products[key].stock >= cart[key].quantity) {
-                    sufficientStock = true;
-                } else {
-                    sufficientStock = false;
-                    break;
-                }
-                if (products[key] === undefined) {
-                    Swal.fire({
-                        position: 'top-end',
-                        type: 'info',
-                        title: 'Something went wrong!',
-                        text: `${cart[key].name} is no longer available and we deleted it from your cart!`,
-                        showConfirmButton: false,
-                        timer: 3000
-                    })
-                    then(() => {
-                        delete cart[key];
-                        localStorage.setItem("cart", JSON.stringify(cart))
-                    })
-                }
-            }
 
-            for (key in cart) {
-                if (sufficientStock) {
-                    var promise = fetch(`https://online-shop-a4050.firebaseio.com/${key}/stock/.json`, {
-                        method: "PUT",
-                        body: products[key].stock - cart[key].quantity,
-                    });
-                    promises.push(promise);
-                    Promise.all(promises)
-                        .then(() => {
-                            Swal.fire({
-                                position: 'top-end',
-                                type: 'success',
-                                title: 'Your order has been succesfully processed!',
-                                text: "You'll soon receive a confirmation e-mail with all the order details.",
-                                showConfirmButton: false,
-                                timer: 3000
-                            })
-                                .then(() => {
-                                    localStorage.clear();
-                                    cartReset();
-                                    counterUpdate();
-                                })
-                                .then(() => {
-                                    fetch(`https://online-shop-orders.firebaseio.com/.json`, {
-                                        method: 'POST',
-                                        body: JSON.stringify(cart),
-                                        mode: 'cors'
-                                    })
-                                        .then(response => {
-                                            if (!response.ok) {
-                                                throw Error(response.statusText)
-                                            }
-                                            localStorage.clear();
-                                        })
-                                        .catch(error => {
-                                            console.error(error);
-                                        })
-                                })
-                        })
-                } else {
+    var sufficientStock;
+    for (key in cart) {
+        if (products[key].stock >= cart[key].quantity) {
+            sufficientStock = true;
+        } else {
+            sufficientStock = false;
+            break;
+        }
+        if (products[key] === undefined) {
+            Swal.fire({
+                type: 'info',
+                title: 'Something went wrong!',
+                text: `${cart[key].name} is no longer available and we deleted it from your cart!`,
+                showConfirmButton: false,
+                timer: 3000
+            })
+            then(() => {
+                delete cart[key];
+                localStorage.setItem("cart", JSON.stringify(cart))
+            })
+        }
+    }
+
+    for (key in cart) {
+        if (sufficientStock) {
+            var promise = fetch(`https://online-shop-a4050.firebaseio.com/${key}/stock/.json`, {
+                method: "PUT",
+                body: products[key].stock - cart[key].quantity,
+            });
+            promises.push(promise);
+            Promise.all(promises)
+                .then(() => {
                     Swal.fire({
-                        title: 'Something went wrong!',
-                        text: `Your order couldn't be processes due to stock update! Check the cart and try again.`,
-                        type: 'info',
+                        type: 'success',
+                        title: 'Your order has been succesfully processed!',
+                        text: "You'll soon receive a confirmation e-mail with all the order details.",
                         showConfirmButton: false,
                         timer: 3000
                     })
                         .then(() => {
-                            fetch(`https://online-shop-a4050.firebaseio.com/.json`)
-                                .then(response => {
-                                    if (!response.ok)
-                                        throw Error(response.statusText);
-                                    return response.json();
-                                })
-                                .then(response => window.products = response)
-                                .then(() => {
-                                    for (key in cart) {
-                                        cart[key].stock = products[key].stock
-                                    }
-                                    displayCart();
-                                })
+                            localStorage.clear();
+                            cartReset();
+                            counterUpdate();
+                        });
+
+                   ( async () => {
+                        try {
+                            await fetch(`https://online-shop-orders.firebaseio.com/.json`, {
+                                method: 'POST',
+                                body: JSON.stringify(cart),
+                                mode: 'cors'
+                            });
+                            localStorage.clear();
+                        }
+                        catch (error) {
+                            console.error(error);
+                        }
+                    })();
+                })
+
+        } else {
+            Swal.fire({
+                title: 'Something went wrong!',
+                text: `Your order couldn't be processes due to stock update! Check the cart and try again.`,
+                type: 'info',
+                showConfirmButton: false,
+                timer: 3000
+            })
+                .then(() => {
+                    fetch(`https://online-shop-a4050.firebaseio.com/.json`)
+                        .then(response => {
+                            if (!response.ok)
+                                throw Error(response.statusText);
+                            return response.json();
                         })
-                }
-            }
-        })
-        .catch(error => {
-            console.error(error);
-        });
-
-
+                        .then(response => window.products = response)
+                        .then(() => {
+                            for (key in cart) {
+                                cart[key].stock = products[key].stock
+                            }
+                            displayCart();
+                        })
+                })
+        }
+    }
 }
 
 

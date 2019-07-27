@@ -68,7 +68,7 @@ async function updateDB(event) {
             GMO: gmo,
             images: images,
             name: name,
-            price: price,
+            price: price * 1,
             quantity: quantity,
             totalCbd: totalCbd,
             stock: stock * 1

@@ -1,7 +1,7 @@
-
+(()=>{
 var url = new URL(document.URL);
 var id = url.searchParams.get('id');
-var cart;
+
 window.onload = () => {
     loader()
     document.querySelector("#cart").addEventListener("click", () => {
@@ -45,11 +45,10 @@ function loader() {
         document.body.style.backgroundPosition = "";
     }
 }
-
 function counterUpdate() {
-    let cart = JSON.parse(localStorage.getItem('cart'));
-    let counter = 0;
-    if (Object.keys(cart).length > 0) {
+    var cart = cartInit();
+    var counter = 0;
+    if (cart) {
         for (key in cart) {
             counter += cart[key].quantity;
         }
@@ -148,18 +147,17 @@ function displayDetails(obj) {
     document.querySelector("#decrement").addEventListener("click", () => {
         if (parseInt(document.getElementById('quantity').value, 10) > 1)
             document.getElementById('quantity').value -= 1;
-        window.desiredQuantity = parseInt(document.querySelector("#quantity").value);
+        
 
     });
 
     document.querySelector("#increment").addEventListener("click", () => {
-        window.desiredQuantity = parseInt(document.getElementById('quantity').value, 10);
+        var desiredQuantity = Number(document.querySelector("#quantity").value);
         if (desiredQuantity < detailedProduct.stock) {
-            var value = parseInt(document.getElementById('quantity').value, 10);
+            let value = parseInt(document.getElementById('quantity').value, 10);
             value = isNaN(value) ? 0 : value;
             value++;
             document.getElementById('quantity').value = value;
-            window.desiredQuantity = value;
         }
     });
 
@@ -171,13 +169,16 @@ function displayDetails(obj) {
 }
 
 function cartInit() {
+    var cart;
     if (localStorage.length > 0)
-        window.cart = JSON.parse(localStorage.getItem('cart'));
+        cart = JSON.parse(localStorage.getItem('cart'));
     else
-        window.cart = {}
+        cart = {}
+    return cart;
 }
 
 function addToCart() {
+    var cart = cartInit();
     var desiredQuantity = Number(document.querySelector("#quantity").value);
     if (desiredQuantity > 0) {
         if (cart[id]) {
@@ -217,7 +218,7 @@ function addToCart() {
                     })
                 }
             } else {
-                window.cart[id] = {
+                cart[id] = {
                     images: detailedProduct.images,
                     name: detailedProduct.name,
                     price: detailedProduct.price,
@@ -237,7 +238,7 @@ function addToCart() {
 
                 document.querySelector("#quantity").value = 0;
                 counterUpdate();
-                popperCart();
+               
             }
         }
     } else {
@@ -250,4 +251,4 @@ function addToCart() {
         });
     }
 }
-
+})()

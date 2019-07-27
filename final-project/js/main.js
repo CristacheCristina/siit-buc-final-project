@@ -50,7 +50,7 @@ function loader() {
 window.onscroll = function () { scrollFunction() };
 
 function scrollFunction() {
-    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
         document.querySelector("#scrollTop").style.display = "block";
     } else {
         document.querySelector("#scrollTop").style.display = "none";
@@ -98,6 +98,7 @@ function details(key) {
 }
 
 function cartInit() {
+    cart;
     if (localStorage.getItem("cart"))
         cart = JSON.parse(localStorage.getItem('cart'));
     else
