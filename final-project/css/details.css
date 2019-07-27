@@ -83,9 +83,10 @@ li {
 }
 
 .navigation {
-    position: sticky;
-    background-color: rgba(12, 149, 7, 0.041)
+    background-color: rgba(12, 149, 7, 0.02);
+    position: relative;
 }
+
 
 .sticky {
     position: fixed;

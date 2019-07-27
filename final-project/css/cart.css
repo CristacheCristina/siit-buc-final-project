@@ -38,7 +38,9 @@ li {
 
 .navigation {
     background-color: rgba(12, 149, 7, 0.02);
+    position: relative;
 }
+
 
 .menu-btns {
     position: absolute;
