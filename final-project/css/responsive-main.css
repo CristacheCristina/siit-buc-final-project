@@ -116,7 +116,10 @@
         left: 6.5em;
     }
     #search-input{
-        margin:0 1.4em 0 0;
+       margin-left: -2em;
+    }
+    #home{
+        margin-left: -2em;
     }
     
 }
