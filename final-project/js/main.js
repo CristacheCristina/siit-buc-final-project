@@ -1,10 +1,10 @@
 
 window.onload = () => {
     loader();
-    document.querySelector("#cartIcon").addEventListener("click", () => {
+    document.querySelector("#cart").addEventListener("click", () => {
         window.location.assign("cart.html")
     });
-    document.querySelector("#adminIcon").addEventListener("click", () => {
+    document.querySelector("#admin").addEventListener("click", () => {
         window.location.assign("admin.html")
     });
 
@@ -75,8 +75,6 @@ function counterUpdate() {
 function display() {
     var images;
     for (key in products) {
-        console.log(products[key]);
-        
         images = products[key].images.split(" ");
         document.querySelector("#items-display").innerHTML += `
                     <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 text-center ">
