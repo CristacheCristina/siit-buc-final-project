@@ -28,8 +28,9 @@ a {
 }
 
 a:hover {
-    color: rgb(240, 216, 84);
+    color: black;
     transition-duration: .5s;
+    text-decoration: none;
 }
 
 /* .navigation {

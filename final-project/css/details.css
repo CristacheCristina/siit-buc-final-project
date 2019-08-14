@@ -135,7 +135,9 @@ li {
     font-size: 18px;
     line-height: 1em;
 }
-
+.carousel-control-prev{
+    color:gray;
+}
 #addToCart {
     width: 10em;
     height: 2em;

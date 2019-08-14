@@ -15,6 +15,7 @@ window.onload = () => {
     });
     fetch(`https://online-shop-a4050.firebaseio.com/${key}.json`)
         .then(response => {
+            if(response.ok)
             return response.json()
         })
         .then(response => {
@@ -41,7 +42,7 @@ window.onload = () => {
 async function updateDB(event) {
     event.preventDefault();
     let category = document.querySelector('#category').value;
-    let decription = document.querySelector('#description').value;
+    let description = document.querySelector('#description').value;
     let dose = document.querySelector('#dose').value;
     let gmo = document.querySelector('#gmo').value;
     let images = document.querySelector('#images').value;
@@ -52,7 +53,7 @@ async function updateDB(event) {
     let stock = document.querySelector('#stock').value;
 
     if (category !== '' &&
-        decription !== '' &&
+        description !== '' &&
         dose !== '' &&
         gmo !== '' &&
         images !== '' &&
@@ -63,7 +64,7 @@ async function updateDB(event) {
         stock !== '') {
         let edited = {
             category: category,
-            decription: description,
+            description: description,
             dose: dose,
             GMO: gmo,
             images: images,

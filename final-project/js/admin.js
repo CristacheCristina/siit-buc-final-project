@@ -46,14 +46,14 @@ function display(obj) {
                     <td class="d-none d-sm-none d-md-block"><img src = "../images/${images[0]}"></td>
                     <td>${obj[key].name}</td>
                     <td>${obj[key].price}</td>
-                    <td>${obj[key].stock}</td>
+                    <td>${(obj[key].stock)}</td>
                     <td><button class="editBtn" id = "edit${key}" onclick = "edit('${key}')">Edit</button></td>
                     <td><button class="deleteBtn" id = "delete${key}" onclick = "remove('${key}')" >Delete</button></td>
                 </tr>
                 `}
 }
 
-async function remove(key) {
+function remove(key) {
     Swal.fire({
         title: 'Are you sure?',
         text: "You won't be able to revert this!",

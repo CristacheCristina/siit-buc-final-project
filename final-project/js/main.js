@@ -16,7 +16,7 @@ window.onload = () => {
     document.querySelector("#search-input").addEventListener("keyup", event => {
         var searchFor = event.target.value;
         document.querySelector("#items-display").innerHTML = '';
-        for (key in products) {
+         {
             if (products[key].category.includes(searchFor.toLowerCase()) || products[key].name.includes(searchFor.toLowerCase()))
                 display();
         }
@@ -82,7 +82,7 @@ function display() {
                             <div>
                                 <img class = "display-img card-img-top" onclick = "details('${key}')" src="../images/${images[0]}" alt="">
                             </div>
-                            <div id = 'h'><h6  class = "product-name" >${products[key].name}</h6></div>
+                            <div id = 'h'><a href="details.html?id=${key}"><h6  class = "product-name" >${products[key].name}</h6></a></div>
                             <div ><p class = "product-price mx-auto">$${products[key].price.toFixed(2)}</p></div>
                             <div class = "tocart text-center" ><button class="to-cart-btn" onclick = "addToCart('${key}')" id = "addTocart" >Add to Cart<i id = "addedToCart" class="fas "></i></button></div>
                         </div>

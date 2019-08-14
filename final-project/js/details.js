@@ -1,69 +1,69 @@
-(()=>{
-var url = new URL(document.URL);
-var id = url.searchParams.get('id');
+(() => {
+    var url = new URL(document.URL);
+    var id = url.searchParams.get('id');
 
-window.onload = () => {
-    loader()
-    document.querySelector("#cart").addEventListener("click", () => {
-        window.location.assign("cart.html")
-    });
+    window.onload = () => {
+        loader()
+        document.querySelector("#cart").addEventListener("click", () => {
+            window.location.assign("cart.html")
+        });
 
-    document.querySelector("#admin").addEventListener("click", () => {
-        window.location.assign("admin.html")
-    });
+        document.querySelector("#admin").addEventListener("click", () => {
+            window.location.assign("admin.html")
+        });
 
-    document.querySelector("#home").addEventListener("click", () => {
-        window.location.assign("index.html")
-    });
+        document.querySelector("#home").addEventListener("click", () => {
+            window.location.assign("index.html")
+        });
 
-    getAndDisplay();
-}
-
-async function getAndDisplay() {
-    try {
-        let data = await fetch(`https://online-shop-a4050.firebaseio.com/${id}.json`);
-        window.detailedProduct = await data.json();
-        loader();
-        displayDetails(detailedProduct);
-        $('.carousel').carousel();
-        counterUpdate();
-    } catch (error) { console.error(error) }
-}
-function loader() {
-    if (document.body.hasAttribute("load")) {
-        document.body.removeAttribute("load");
-        document.body.setAttribute("loaded", "true");
-        document.body.style.height = "100vh"
-        document.body.style.background = 'url("https://www.seedsmancbd.com/media/productfinder/loading.gif") no-repeat';
-        document.body.style.backgroundPosition = "50% 50%";
-
-    } else {
-        document.body.removeAttribute("loaded");
-        document.body.setAttribute("load", "true");
-        document.body.style.height = '';
-        document.body.style.background = '';
-        document.body.style.backgroundPosition = "";
+        getAndDisplay();
     }
-}
-function counterUpdate() {
-    var cart = cartInit();
-    var counter = 0;
-    if (cart) {
-        for (key in cart) {
-            counter += cart[key].quantity;
+
+    async function getAndDisplay() {
+        try {
+            let data = await fetch(`https://online-shop-a4050.firebaseio.com/${id}.json`);
+            window.detailedProduct = await data.json();
+            loader();
+            displayDetails(detailedProduct);
+            $('.carousel').carousel();
+            counterUpdate();
+        } catch (error) { console.error(error) }
+    }
+    function loader() {
+        if (document.body.hasAttribute("load")) {
+            document.body.removeAttribute("load");
+            document.body.setAttribute("loaded", "true");
+            document.body.style.height = "100vh"
+            document.body.style.background = 'url("https://www.seedsmancbd.com/media/productfinder/loading.gif") no-repeat';
+            document.body.style.backgroundPosition = "50% 50%";
+
+        } else {
+            document.body.removeAttribute("loaded");
+            document.body.setAttribute("load", "true");
+            document.body.style.height = '';
+            document.body.style.background = '';
+            document.body.style.backgroundPosition = "";
         }
     }
-    document.querySelector("#counter").innerHTML = counter;
-}
+    function counterUpdate() {
+        var cart = cartInit();
+        var counter = 0;
+        if (cart) {
+            for (key in cart) {
+                counter += cart[key].quantity;
+            }
+        }
+        document.querySelector("#counter").innerHTML = counter;
+    }
 
-function displayDetails(obj) {
-    var images = detailedProduct.images.split(" ");
-    var details = detailedProduct.description.split(/\n/);
-    var newDetails = details.map(function (elem) {
-        return `<i class="fas fa-check ml-2" style="float:left"></i><p>${elem}</p>`;
-    }).join('');
+    function displayDetails(obj) {
+        var images = detailedProduct.images.split(" ");
+        var details = detailedProduct.description.split(/\n/);
+        var newDetails = details.map(function (elem) {
+            return `<i class="fas fa-check ml-2" style="float:left"></i><p>${elem}</p>`;
+        }).join('');
 
-    document.querySelector(".mainSection").innerHTML = `  
+        document.querySelector(".mainSection").innerHTML = `  
     <div class="row">
      <div class="col-11 col-sm-11 col-md-6 col-lg-6 col-xl-5 image details-box mx-auto">
         <div id="carouselExampleIndicators" class="carousel custom slide" data-ride="carousel">
@@ -108,7 +108,7 @@ function displayDetails(obj) {
              <div class="col-4 col-sm-4 col-md-4 col-md-4 col-lg-4 facts-border">
                 <div class = "facts">
                    <p>Fact</p>
-                   <p>${obj.GMO ? "GMO" : "Non-GMO"}</p>
+                   <p>${obj.GMO === "true" ? "GMO" : "Non-GMO"}</p>
                 </div>
              </div>
              <div class="col-4 col-sm-4 col-md-4 col-md-4 col-lg-4 facts-border ">
@@ -126,129 +126,139 @@ function displayDetails(obj) {
     </div>
     `;
 
-    document.querySelector('#addToCart').onmouseover = () => {
-        if (detailedProduct.stock === 0) {
-            document.querySelector("#addToCart").style.transitionDuration = "2000"
-            document.querySelector("#addToCart").innerHTML = '';
-            document.querySelector("#addToCart").innerHTML = "Out of stock"
-        }
-
-    }
-
-    document.querySelector('#addToCart').onmouseout = () => {
-        if (detailedProduct.stock === 0) {
-            document.querySelector("#addToCart").innerHTML = '';
-            document.querySelector("#addToCart").innerHTML = "Add to cart"
-        }
-
-    }
-
-
-    document.querySelector("#decrement").addEventListener("click", () => {
-        if (parseInt(document.getElementById('quantity').value, 10) > 1)
-            document.getElementById('quantity').value -= 1;
-        
-
-    });
-
-    document.querySelector("#increment").addEventListener("click", () => {
-        var desiredQuantity = Number(document.querySelector("#quantity").value);
-        if (desiredQuantity < detailedProduct.stock) {
-            let value = parseInt(document.getElementById('quantity').value, 10);
-            value = isNaN(value) ? 0 : value;
-            value++;
-            document.getElementById('quantity').value = value;
-        }
-    });
-
-    document.querySelector("#addToCart").addEventListener("click", () => {
-        cartInit();
-        addToCart()
-    });
-
-}
-
-function cartInit() {
-    var cart;
-    if (localStorage.length > 0)
-        cart = JSON.parse(localStorage.getItem('cart'));
-    else
-        cart = {}
-    return cart;
-}
-
-function addToCart() {
-    var cart = cartInit();
-    var desiredQuantity = Number(document.querySelector("#quantity").value);
-    if (desiredQuantity > 0) {
-        if (cart[id]) {
-            if (desiredQuantity > cart[id].stock) {
-                Swal.fire({
-                    type: 'error',
-                    title: 'The required quantity exceeds our stock!',
-
-                })
-            } else {
-                cart[id].quantity += desiredQuantity;
-                cart[id].stock -= desiredQuantity;
-                cart[id].total += (cart[id].price * 1) * desiredQuantity
-                localStorage.setItem('cart', JSON.stringify(cart));
-                Swal.fire({
-                    position: 'top-end',
-                    type: 'success',
-                    title: 'Added to cart!',
-                    showConfirmButton: false,
-                    timer: 2000
-                });
-                document.querySelector("#quantity").value = 0;
-                counterUpdate();
-                popperCart();
+        document.querySelector('#addToCart').onmouseover = () => {
+            if (detailedProduct.stock === 0) {
+                document.querySelector("#addToCart").style.transitionDuration = "2000"
+                document.querySelector("#addToCart").innerHTML = '';
+                document.querySelector("#addToCart").innerHTML = "Out of stock"
             }
-        } else {
-            if (desiredQuantity > detailedProduct.stock) {
-                if (detailedProduct.stock > 0) {
+
+        }
+
+        document.querySelector('#addToCart').onmouseout = () => {
+            if (detailedProduct.stock === 0) {
+                document.querySelector("#addToCart").innerHTML = '';
+                document.querySelector("#addToCart").innerHTML = "Add to cart"
+            }
+
+        }
+
+
+        document.querySelector("#decrement").addEventListener("click", () => {
+            if (parseInt(document.getElementById('quantity').value, 10) > 1)
+                document.getElementById('quantity').value -= 1;
+
+
+        });
+
+        document.querySelector("#increment").addEventListener("click", () => {
+            var cart = cartInit();
+            var desiredQuantity = Number(document.querySelector("#quantity").value);
+            let value = parseInt(document.getElementById('quantity').value, 10);
+            if (cart[key]) {
+                if ((detailedProduct.stock - cart[key].quantity) >= 0) {
+                    if (desiredQuantity < detailedProduct.stock) {
+                        value = isNaN(value) ? 0 : value;
+                        value++;
+                        document.getElementById('quantity').value = value;
+                    }
+                }else{
                     Swal.fire({
                         type: 'error',
                         title: 'The required quantity exceeds our stock!',
                     })
-                } else {
+                }
+            }
+        });
+
+        document.querySelector("#addToCart").addEventListener("click", () => {
+            cartInit();
+            addToCart()
+        });
+
+    }
+
+    function cartInit() {
+        var cart;
+        if (localStorage.length > 0)
+            cart = JSON.parse(localStorage.getItem('cart'));
+        else
+            cart = {}
+        return cart;
+    }
+
+    function addToCart() {
+        var cart = cartInit();
+        var desiredQuantity = Number(document.querySelector("#quantity").value);
+        if (desiredQuantity > 0) {
+            if (cart[id]) {
+                if (desiredQuantity > cart[id].stock) {
                     Swal.fire({
                         type: 'error',
-                        title: 'This item is out of stock!',
+                        title: 'The required quantity exceeds our stock!',
+
                     })
+                } else {
+                    cart[id].quantity += desiredQuantity;
+                    cart[id].stock -= desiredQuantity;
+                    cart[id].total += (cart[id].price * 1) * desiredQuantity
+                    localStorage.setItem('cart', JSON.stringify(cart));
+                    Swal.fire({
+                        position: 'top-end',
+                        type: 'success',
+                        title: 'Added to cart!',
+                        showConfirmButton: false,
+                        timer: 2000
+                    });
+                    document.querySelector("#quantity").value = 0;
+                    counterUpdate();
+                    popperCart();
                 }
             } else {
-                cart[id] = {
-                    images: detailedProduct.images,
-                    name: detailedProduct.name,
-                    price: detailedProduct.price,
-                    stock: detailedProduct.stock - desiredQuantity,
-                    quantity: desiredQuantity,
-                    total: detailedProduct.price * 1
-                };
+                if (desiredQuantity > detailedProduct.stock) {
+                    if (detailedProduct.stock > 0) {
+                        Swal.fire({
+                            type: 'error',
+                            title: 'The required quantity exceeds our stock!',
+                        })
+                    } else {
+                        Swal.fire({
+                            type: 'error',
+                            title: 'This item is out of stock!',
+                        })
+                    }
+                } else {
+                    cart[id] = {
+                        images: detailedProduct.images,
+                        name: detailedProduct.name,
+                        price: detailedProduct.price,
+                        stock: detailedProduct.stock - desiredQuantity,
+                        quantity: desiredQuantity,
+                        total: detailedProduct.price * 1
+                    };
 
-                localStorage.setItem('cart', JSON.stringify(cart));
-                Swal.fire({
-                    position: 'top-end',
-                    type: 'success',
-                    title: 'Added to cart!',
-                    showConfirmButton: false,
-                    timer: 2000
-                });
+                    localStorage.setItem('cart', JSON.stringify(cart));
+                    Swal.fire({
+                        position: 'top-end',
+                        type: 'success',
+                        title: 'Added to cart!',
+                        showConfirmButton: false,
+                        timer: 2000
+                    });
 
-                document.querySelector("#quantity").value = 0;
-                counterUpdate();
-               
+                    document.querySelector("#quantity").value = 0;
+                    counterUpdate();
+
+                }
             }
+        } else {
+            Swal.fire({
+                position: 'top-end',
+                type: 'error',
+                title: 'You need to add al teals 1 item!',
+                showConfirmButton: false,
+                timer: 3000
+            });
         }
-    } else {
-        Swal.fire({
-            position: 'top-end',
-            type: 'error',
-            title: 'You need to add al teals 1 item!',
-            showConfirmButton: false,
-            timer: 3000
-        });
     }
-}
 })()

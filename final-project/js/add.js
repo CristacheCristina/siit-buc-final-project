@@ -37,11 +37,10 @@ document.querySelector('#addBtn').addEventListener("click", (event) => {
             GMO: GMO,
             images: images,
             name: name,
-            price: price,
+            price: price*1,
             quantity:quantity,
             totalCbd: totalCbd,
             stock: stock*1
-            
         }
 
         document.body.style.height = "100vh"
