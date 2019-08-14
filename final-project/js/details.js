@@ -169,6 +169,7 @@
                     })
                 }
             }
+            document.getElementById('quantity').value = value;
         });
 
         document.querySelector("#addToCart").addEventListener("click", () => {
