@@ -169,6 +169,8 @@
                     })
                 }
             }
+            value = isNaN(value) ? 0 : value;
+            value++;
             document.getElementById('quantity').value = value;
         });
 
