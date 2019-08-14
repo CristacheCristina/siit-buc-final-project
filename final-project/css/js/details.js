@@ -155,7 +155,7 @@
             var cart = cartInit();
             var desiredQuantity = Number(document.querySelector("#quantity").value);
             let value = parseInt(document.getElementById('quantity').value, 10);
-            if (cart[key]) {
+            if (cart[id]) {
                 if ((detailedProduct.stock - cart[key].quantity) >= 0) {
                     if (desiredQuantity < detailedProduct.stock) {
                         value = isNaN(value) ? 0 : value;
