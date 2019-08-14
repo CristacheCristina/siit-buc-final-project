@@ -168,10 +168,12 @@
                         title: 'The required quantity exceeds our stock!',
                     })
                 }
+            } else if(value<detailedProduct.stock){
+                value = isNaN(value) ? 0 : value;
+                value++;
+                document.getElementById('quantity').value = value;
             }
-            value = isNaN(value) ? 0 : value;
-            value++;
-            document.getElementById('quantity').value = value;
+      
         });
 
         document.querySelector("#addToCart").addEventListener("click", () => {
