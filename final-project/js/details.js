@@ -2,8 +2,24 @@
     var url = new URL(document.URL);
     var id = url.searchParams.get('id');
 
+
     window.onload = () => {
-        loader()
+        alertify.defaults.transition = "slide";
+        alertify.defaults.theme.ok = "btn btn-primary";
+        alertify.defaults.theme.cancel = "btn btn-danger";
+        alertify.defaults.theme.input = "form-control";
+        alertify.defaults.glossary.title = '';
+        // alertify.defaults = {
+        //     glossary: {
+        //         // dialogs default title
+        //         title: 'AlertifyJS',
+        //         // ok button text
+        //         ok: 'OK',
+        //         // cancel button text
+        //         cancel: 'Cancel'
+        //     }
+        // }
+        loader();
         document.querySelector("#cart").addEventListener("click", () => {
             window.location.assign("cart.html")
         });
@@ -22,6 +38,7 @@
     async function getAndDisplay() {
         try {
             let data = await fetch(`https://online-shop-a4050.firebaseio.com/${id}.json`);
+            console.log(data);
             window.detailedProduct = await data.json();
             loader();
             displayDetails(detailedProduct);
@@ -57,6 +74,7 @@
     }
 
     function displayDetails(obj) {
+        console.log(detailedProduct);
         var images = detailedProduct.images.split(" ");
         var details = detailedProduct.description.split(/\n/);
         var newDetails = details.map(function (elem) {
@@ -64,33 +82,33 @@
         }).join('');
 
         document.querySelector(".mainSection").innerHTML = `  
-    <div class="row">
-     <div class="col-11 col-sm-11 col-md-6 col-lg-6 col-xl-5 image details-box mx-auto">
-        <div id="carouselExampleIndicators" class="carousel custom slide" data-ride="carousel">
-          <ol class="carousel-indicators">
-            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-          </ol>
-          <div class="carousel-inner">
-            <div data-interval="3000" class="carousel-item active">
-              <img class="d-block w-100 img-fluid" src="../images/${images[0]}" alt="First slide">
+        <div class="row">
+         <div class="col-11 col-sm-11 col-md-6 col-lg-6 col-xl-5 image details-box mx-auto">
+            <div id="carouselExampleIndicators" class="carousel custom slide" data-ride="carousel">
+              <ol class="carousel-indicators">
+                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+              </ol>
+              <div class="carousel-inner">
+                <div data-interval="3000" class="carousel-item active">
+                  <img class="d-block w-100 img-fluid" src="../images/${images[0]}" alt="First  slide">
+                </div>
+                <div data-interval="3000" class="carousel-item">
+                  <img class="d-block w-100 img-fluid" src="../images/${images[1]}" alt="Second     slide">
+                </div>
+        
+              </div>
+              <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button"  data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+              </a>
+              <a class="carousel-control-next" href="#carouselExampleIndicators" role="button"  data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+              </a>
             </div>
-            <div data-interval="3000" class="carousel-item">
-              <img class="d-block w-100 img-fluid" src="../images/${images[1]}" alt="Second slide">
-            </div>
-
-          </div>
-          <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-          </a>
-          <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-          </a>
+        
         </div>
-       
-    </div>
     
      <div class="col-11 col-sm-11 col-md-6 col-lg-6 col-xl-6 details-box text-details mx-auto">
          <h2 id = "product-name" class="ml-2">${obj.name}</h2>
@@ -156,24 +174,31 @@
             var desiredQuantity = Number(document.querySelector("#quantity").value);
             let value = parseInt(document.getElementById('quantity').value, 10);
             if (cart[id]) {
-                if ((detailedProduct.stock - cart[key].quantity) >= 0) {
-                    if (desiredQuantity < detailedProduct.stock) {
+                if ((detailedProduct.stock - cart[id].quantity) > 0) {
+                    if (desiredQuantity <= detailedProduct.stock - cart[id].quantity) {
                         value = isNaN(value) ? 0 : value;
                         value++;
                         document.getElementById('quantity').value = value;
                     }
-                }else{
+                } else {
+                    console.log(cart);
+                    console.log(cart[id].quantity);
+                    console.log(id);
                     Swal.fire({
                         type: 'error',
-                        title: 'The required quantity exceeds our stock!',
+                        title: `The required quantity exceeds our stock! ${cart[id].quantity} items of this product are already in your cart.`,
                     })
+                    // alertify.dialog('alert').set({ transition: 'zoom', message: `The required quantity exceeds our stock! ${cart[id].quantity} items of this product are already in your cart.` }).set('closable',false).show();
+                    // alertify.alert('Ready!');
+
+
                 }
-            } else if(value<detailedProduct.stock){
+            } else if (desiredQuantity < detailedProduct.stock) {
                 value = isNaN(value) ? 0 : value;
                 value++;
                 document.getElementById('quantity').value = value;
             }
-      
+
         });
 
         document.querySelector("#addToCart").addEventListener("click", () => {
@@ -198,11 +223,17 @@
         if (desiredQuantity > 0) {
             if (cart[id]) {
                 if (desiredQuantity > cart[id].stock) {
-                    Swal.fire({
-                        type: 'error',
-                        title: 'The required quantity exceeds our stock!',
-
-                    })
+                    if (cart[id].stock > 0) {
+                        Swal.fire({
+                            type: 'error',
+                            title: 'The required quantity exceeds our stock!',
+                        })
+                    } else {
+                        Swal.fire({
+                            type: 'error',
+                            title: 'This item is out of stock!',
+                        })
+                    }
                 } else {
                     cart[id].quantity += desiredQuantity;
                     cart[id].stock -= desiredQuantity;

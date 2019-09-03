@@ -16,9 +16,22 @@ window.onload = () => {
     document.querySelector("#search-input").addEventListener("keyup", event => {
         var searchFor = event.target.value;
         document.querySelector("#items-display").innerHTML = '';
-         {
+        var images;
+        for (key in products) {
+            images = products[key].images.split(" ");
             if (products[key].category.includes(searchFor.toLowerCase()) || products[key].name.includes(searchFor.toLowerCase()))
-                display();
+                document.querySelector("#items-display").innerHTML += `
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 text-center ">
+                        <div class = "display-item">
+                            <div>
+                                <img class = "display-img card-img-top" onclick = "details('${key}')" src="../images/${images[0]}" alt="">
+                            </div>
+                            <div id = 'h'><a href="details.html?id=${key}"><h6  class = "product-name" >${products[key].name}</h6></a></div>
+                            <div ><p class = "product-price mx-auto">$${products[key].price.toFixed(2)}</p></div>
+                            <div class = "tocart text-center" ><button class="to-cart-btn" onclick = "addToCart('${key}')" id = "addTocart" >Add to Cart<i id = "addedToCart" class="fas "></i></button></div>
+                        </div>
+                    </div>`
+
         }
     });
 
@@ -84,10 +97,11 @@ function display() {
                             </div>
                             <div id = 'h'><a href="details.html?id=${key}"><h6  class = "product-name" >${products[key].name}</h6></a></div>
                             <div ><p class = "product-price mx-auto">$${products[key].price.toFixed(2)}</p></div>
-                            <div class = "tocart text-center" ><button class="to-cart-btn" onclick = "addToCart('${key}')" id = "addTocart" >Add to Cart<i id = "addedToCart" class="fas "></i></button></div>
+                            <div class = "tocart text-center" ><button class="to-cart-btn"  id='${key}' onclick = "addToCart('${key}')" id = "addTocart" >Add to Cart<i id = "addedToCart" class="fas "></i></button></div>
                         </div>
                     </div>
                 `;
+        document.querySelector('.to-cart-btn').addEventListener("click", addToCart)
     }
 }
 
@@ -104,7 +118,8 @@ function cartInit() {
     return cart;
 }
 
-async function addToCart(key) {
+async function addToCart(e) {
+    var key = e.target.id;
     var cart = cartInit();
     try {
         var data = await fetch(`https://online-shop-a4050.firebaseio.com/${key}.json`);
