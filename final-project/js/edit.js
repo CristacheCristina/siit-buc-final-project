@@ -1,5 +1,6 @@
 let url = new URL(document.URL);
-let key = url.searchParams.get('id');
+let id = url.searchParams.get('id');
+console.log(id);
 window.onload = () => {
     document.querySelector("#form").style.display = "none";
     document.body.style.height = "100vh"
@@ -13,12 +14,13 @@ window.onload = () => {
     document.querySelector('#backToShop').addEventListener('click', () => {
         location.assign("index.html")
     });
-    fetch(`https://online-shop-a4050.firebaseio.com/${key}.json`)
+    fetch(`https://online-shop-a4050.firebaseio.com/${id}.json`)
         .then(response => {
-            if(response.ok)
-            return response.json()
+            if (response.ok && response.status===200)
+                return response.json();
         })
         .then(response => {
+            console.log(response);
             document.querySelector("#form").style.display = "block";
             document.body.style.height = ""
             document.body.style.background = '';
@@ -34,6 +36,9 @@ window.onload = () => {
             document.querySelector("#totalCbd").value = response.totalCbd;
             document.querySelector("#stock").value = response.stock;
             document.querySelector("#saveChanges").addEventListener("click", updateDB)
+        })
+        .catch(error => {
+            console.error(error)
         })
 
 
@@ -75,7 +80,7 @@ async function updateDB(event) {
             stock: stock * 1
         }
         try {
-            let edit = await fetch(`https://online-shop-a4050.firebaseio.com/${key}.json`, {
+            let edit = await fetch(`https://online-shop-a4050.firebaseio.com/${id}.json`, {
                 method: "PUT",
                 body: JSON.stringify(edited),
                 mode: "cors"

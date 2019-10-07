@@ -61,20 +61,19 @@ function display(obj) {
                     <td>${obj[key].name}</td>
                     <td>${obj[key].price}</td>
                     <td>${(obj[key].stock)}</td>
-                    <td><button class="editBtn" id = "${key}" )">Edit</button></td>
+                    <td><button class="editBtn" onclick='edit("${key}")' >Edit</button></td>
                     <td><button class="deleteBtn" id = "'${key}'" onclick = "remove('${key}')" >Delete</button></td>
                 </tr>
                 `
-        document.querySelector('.editBtn').addEventListener('click', (e) => {
-            var key = e.target.id;
-            window.location.assign(`edit.html?id=${key}`)
-        });
+        
         document.querySelector('.deleteBtn').addEventListener('click', remove)
     }
 }
-
-function remove(e) {
-    var key = e.target.id;
+function edit(key){
+    window.location.assign(`edit.html?id=${key}`);
+}
+function remove(key) {
+    
     Swal.fire({
         title: 'Are you sure?',
         text: "You won't be able to revert this!",

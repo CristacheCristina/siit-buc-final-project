@@ -120,7 +120,7 @@ function cartInit() {
 
 async function addToCart(key) {
 
-   
+
     var cart = cartInit();
     try {
         var data = await fetch(`https://online-shop-a4050.firebaseio.com/${key}.json`);

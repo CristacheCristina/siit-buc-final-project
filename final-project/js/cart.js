@@ -199,7 +199,9 @@
 
     function increase(key) {
         var cart = cartInit();
+        
         console.log(key);
+        console.log(cart);
 
         var desiredQuantity = document.querySelector(`[data-id = input${key}]`).value * 1;
         
