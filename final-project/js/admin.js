@@ -19,6 +19,20 @@ window.onload = () => {
         })
 }
 
+function loader() {
+    if (document.body.hasAttribute("load")) {
+        document.body.removeAttribute("load");
+        document.body.setAttribute("loaded", "true");
+        document.body.style.height = "100vh"
+        document.body.style.background = 'url("https://www.seedsmancbd.com/media/productfinder/loading.gif") no-repeat';
+        document.body.style.backgroundPosition = "50% 50%";
+
+    } else if (document.body.hasAttribute("loaded")) {
+        document.body.style.height = '';
+        document.body.style.background = '';
+        document.body.style.backgroundPosition = "";
+    }
+}
 function display(obj) {
     document.querySelector("#items").innerHTML = '';
     document.querySelector("thead").innerHTML = `
@@ -48,7 +62,7 @@ function display(obj) {
                     <td>${obj[key].price}</td>
                     <td>${(obj[key].stock)}</td>
                     <td><button class="editBtn" id = "${key}" )">Edit</button></td>
-                    <td><button class="deleteBtn" id = "${key}" onclick = "remove('${key}')" >Delete</button></td>
+                    <td><button class="deleteBtn" id = "'${key}'" onclick = "remove('${key}')" >Delete</button></td>
                 </tr>
                 `
         document.querySelector('.editBtn').addEventListener('click', (e) => {

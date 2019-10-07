@@ -97,7 +97,7 @@ function display() {
                             </div>
                             <div id = 'h'><a href="details.html?id=${key}"><h6  class = "product-name" >${products[key].name}</h6></a></div>
                             <div ><p class = "product-price mx-auto">$${products[key].price.toFixed(2)}</p></div>
-                            <div class = "tocart text-center" ><button class="to-cart-btn"  id='${key}' onclick = "addToCart('${key}')" id = "addTocart" >Add to Cart<i id = "addedToCart" class="fas "></i></button></div>
+                            <div class = "tocart text-center" ><button class="to-cart-btn"  id='${key}' onclick = "addToCart('${key}')" >Add to Cart<i id = "addedToCart" class="fas "></i></button></div>
                         </div>
                     </div>
                 `;
@@ -118,8 +118,9 @@ function cartInit() {
     return cart;
 }
 
-async function addToCart(e) {
-    var key = e.target.id;
+async function addToCart(key) {
+
+   
     var cart = cartInit();
     try {
         var data = await fetch(`https://online-shop-a4050.firebaseio.com/${key}.json`);
